@@ -8,8 +8,7 @@ const errorTweet = {
   author: {
     name: "Twinster",
     username: "twinster_app",
-    avatarUrl:
-      "https://pbs.twimg.com/profile_images/1481415043443044360/LG5n1vzt_400x400.jpg",
+    avatarUrl: "/twinster_social.svg",
     verified: true,
   },
   text: "Nothing to see here. Try another link.",
