@@ -1,13 +1,13 @@
 import { Center, Heading } from "@chakra-ui/react";
 
-const ComingSoon = () => {
+const Home = () => {
   return (
-    <Center minH="100vh" bgGradient="linear(to-r, teal.200, blue.500)">
-      <Heading size="4xl" textColor="white">
-        Shiu...
-      </Heading>
-    </Center>
+    <>
+      <Center minH="100vh">
+        <Heading size="4xl">Twinster</Heading>
+      </Center>
+    </>
   );
 };
 
-export default ComingSoon;
+export default Home;
