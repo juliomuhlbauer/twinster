@@ -11,6 +11,7 @@ import {
   IconButton,
   Input,
   Stack,
+  chakra,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
@@ -38,7 +39,16 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
             Twinster
           </Heading>
         </Stack>
-        <Box w="100%">
+
+        <chakra.form
+          w="100%"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (link) {
+              router.push(`/app/tweet?id=${link.slice(-19)}`);
+            }
+          }}
+        >
           <FormLabel>Enter a link to a tweet</FormLabel>
           <HStack w="100%">
             <Input
@@ -47,16 +57,13 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
               placeholder="https://twitter.com/JamesClear/status/1334334544598740994"
             />
             <IconButton
+              type="submit"
               aria-label="Fetch tweet"
               icon={<Icon as={AiOutlineArrowRight} />}
-              onClick={() => {
-                if (link) {
-                  router.push(`/app/tweet?id=${link.slice(-19)}`);
-                }
-              }}
             />
           </HStack>
-        </Box>
+        </chakra.form>
+
         <Stack align="center" spacing={4}>
           <Heading size="lg">Tweet of the day</Heading>
           <Box

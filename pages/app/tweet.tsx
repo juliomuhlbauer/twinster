@@ -86,7 +86,7 @@ const Editor: FC<Editor> = ({ tweet }) => {
           />
         </NextLink>
 
-        <NextLink href="/" passHref>
+        <NextLink href="/app" passHref>
           <HStack as={Link} variant="button" p={2} textDecoration="none">
             <TwinsterIcon boxSize={12} />
             <Heading>Twinster</Heading>
