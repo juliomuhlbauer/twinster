@@ -79,7 +79,7 @@ const Editor: FC<Editor> = ({ tweet }) => {
         borderBottomWidth="1px"
         borderColor="gray.600"
       >
-        <NextLink href="../" passHref>
+        <NextLink href="/app" passHref>
           <IconButton
             icon={<Icon as={AiOutlineArrowLeft} />}
             aria-label="Return"
