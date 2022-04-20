@@ -45,7 +45,12 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
           onSubmit={(e) => {
             e.preventDefault();
             if (link) {
-              router.push(`/app/tweet?id=${link.slice(-19)}`);
+              router.push({
+                pathname: "/app/tweet",
+                query: {
+                  id: link.slice(-19),
+                },
+              });
             }
           }}
         >
@@ -73,7 +78,11 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
             borderColor="gray.700"
             boxShadow="lg"
           >
-            <AspectRatio ratio={4 / 2} w="lg">
+            <AspectRatio
+              ratio={4 / 2}
+              w={{ base: "xs", sm: "md", md: "lg" }}
+              maxW="lg"
+            >
               <Tweet theme="darkBlue" tweet={dailyTweet} />
             </AspectRatio>
           </Box>

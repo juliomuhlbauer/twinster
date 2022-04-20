@@ -98,7 +98,11 @@ const Editor: FC<Editor> = ({ tweet }) => {
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
             <Box ref={ref}>
-              <AspectRatio ratio={1 / 1} w="lg">
+              <AspectRatio
+                ratio={1 / 1}
+                w={{ base: "xs", sm: "md", md: "lg" }}
+                maxW="lg"
+              >
                 <Tweet theme={theme} tweet={tweet} />
               </AspectRatio>
             </Box>
