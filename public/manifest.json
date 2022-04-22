@@ -12,5 +12,13 @@
   "background_color": "#1c2732",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "share_target": {
+    "action": "/app/tweet",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "id"
+    }
+  }
 }
