@@ -1,0 +1,16 @@
+{
+  "name": "Twinster",
+  "short_name": "Twinster",
+  "icons": [
+    {
+      "src": "/twinster.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#00B5D8",
+  "background_color": "#1c2732",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -12,6 +12,7 @@ import {
   Input,
   Stack,
   chakra,
+  Button,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
@@ -102,6 +103,18 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
               <Tweet theme="darkBlue" tweet={dailyTweet} />
             </AspectRatio>
           </Box>
+          <Button
+            onClick={() => {
+              router.push({
+                pathname: "/app/tweet",
+                query: {
+                  id: dailyTweet.id,
+                },
+              });
+            }}
+          >
+            Try it
+          </Button>
         </Stack>
       </Stack>
     </Center>

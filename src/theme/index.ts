@@ -51,7 +51,7 @@ export const theme = extendTheme({
   fonts,
   semanticTokens: {
     colors: {
-      accent: twitterColors.blue,
+      accent: "#00B5D8",
       bg: themeColors.darkBlue.bg,
     },
   },
