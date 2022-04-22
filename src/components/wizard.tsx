@@ -22,6 +22,21 @@ interface Wizard {
   dailyTweet: TweetProps;
 }
 
+const findId = (link: string) => {
+  if (link.includes("https://twitter.com/")) {
+    const url = new URL(link);
+    const idIndex =
+      url.pathname.split("/").findIndex((path) => path === "status") + 1;
+    const id = url.pathname.split("/")[idIndex];
+
+    return id;
+  } else {
+    const id = link;
+
+    return id;
+  }
+};
+
 const Wizard: FC<Wizard> = ({ dailyTweet }) => {
   const [link, setLink] = useState("");
   const router = useRouter();
@@ -45,23 +60,10 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
           onSubmit={(e) => {
             e.preventDefault();
             if (link) {
-              const findId = () => {
-                if (link.includes("https://twitter.com/")) {
-                  const url = new URL(link);
-                  if (url.pathname.split("/")[2] === "status") {
-                    const id = url.pathname.split("/")[3];
-                    return id;
-                  }
-                  return link;
-                } else {
-                  return link;
-                }
-              };
-
               router.push({
                 pathname: "/app/tweet",
                 query: {
-                  id: findId(),
+                  id: findId(link),
                 },
               });
             }
