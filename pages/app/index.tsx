@@ -27,7 +27,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
     "1334334544598740994",
   ];
 
-  const id = ids[Math.floor(Math.random() * ids.length)];
+  // const id = ids[Math.floor(Math.random() * ids.length)];
+
+  const dayOfTheMonth = new Date().getDate();
+
+  const id = ids[Math.floor((dayOfTheMonth / 100) * ids.length)];
 
   const dailyTweet = await getTweet(id);
 
