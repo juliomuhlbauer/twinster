@@ -45,18 +45,32 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
           onSubmit={(e) => {
             e.preventDefault();
             if (link) {
+              const findId = () => {
+                if (link.includes("https://twitter.com/")) {
+                  const url = new URL(link);
+                  if (url.pathname.split("/")[2] === "status") {
+                    const id = url.pathname.split("/")[3];
+                    return id;
+                  }
+                  return link;
+                } else {
+                  return link;
+                }
+              };
+
               router.push({
                 pathname: "/app/tweet",
                 query: {
-                  id: link.slice(-19),
+                  id: findId(),
                 },
               });
             }
           }}
         >
-          <FormLabel>Enter a link to a tweet</FormLabel>
+          <FormLabel htmlFor="link">Enter a link to a tweet</FormLabel>
           <HStack w="100%">
             <Input
+              id="link"
               value={link}
               onChange={(e) => setLink(e.target.value)}
               placeholder="https://twitter.com/JamesClear/status/1334334544598740994"

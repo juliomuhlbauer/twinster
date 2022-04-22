@@ -22,6 +22,7 @@ import { GetServerSideProps } from "next";
 import { FC, useCallback, useRef, useState } from "react";
 import NextLink from "next/link";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { FaTwitter } from "react-icons/fa";
 import { toPng } from "html-to-image";
 import { TwinsterIcon } from "@/theme/icons/twinster";
 
@@ -73,27 +74,39 @@ const Editor: FC<Editor> = ({ tweet }) => {
   return (
     <>
       <HStack
+        justify="space-between"
         py={2}
         px={8}
-        spacing={6}
         borderBottomWidth="1px"
         borderColor="gray.600"
       >
-        <NextLink href="/app" passHref>
-          <IconButton
-            icon={<Icon as={AiOutlineArrowLeft} />}
-            aria-label="Return"
-          />
-        </NextLink>
+        <HStack spacing={6}>
+          <NextLink href="/app" passHref>
+            <IconButton
+              icon={<Icon as={AiOutlineArrowLeft} />}
+              aria-label="Return"
+            />
+          </NextLink>
 
-        <NextLink href="/app" passHref>
-          <HStack as={Link} variant="button" p={2} textDecoration="none">
-            <TwinsterIcon boxSize={12} />
-            <Heading>Twinster</Heading>
-          </HStack>
-        </NextLink>
+          <NextLink href="/app" passHref>
+            <HStack as={Link} variant="button" p={2} textDecoration="none">
+              <TwinsterIcon boxSize={12} />
+              <Heading>Twinster</Heading>
+            </HStack>
+          </NextLink>
+        </HStack>
+
+        <IconButton
+          as={Link}
+          href="https://twitter.com/twinster_app"
+          icon={<Icon as={FaTwitter} boxSize={6} />}
+          aria-label="Twitter"
+          isExternal
+          rounded="full"
+          colorScheme="primary"
+          variant="ghost"
+        />
       </HStack>
-
       <Center py={4}>
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">

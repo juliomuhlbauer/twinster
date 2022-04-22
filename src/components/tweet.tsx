@@ -27,7 +27,11 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
     <Box bgColor={bg}>
       <Stack p={8} spacing={4} w="100%">
         <HStack>
-          <Img src={tweet.author.avatarUrl} borderRadius="full" boxSize="12" />
+          <Img
+            src={tweet.author.avatarUrl}
+            borderRadius="full"
+            boxSize={{ base: 10, sm: 12 }}
+          />
           <Box>
             <Heading
               d="flex"
@@ -35,7 +39,7 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
               alignItems="center"
               lineHeight="shorter"
               fontWeight="bold"
-              fontSize="xl"
+              fontSize={{ base: "md", sm: "lg", md: "xl" }}
               textColor={accent}
             >
               {tweet.author.name}
@@ -55,7 +59,7 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
             </Heading>
             <Heading
               lineHeight="shorter"
-              fontSize="md"
+              fontSize={{ base: "xs", sm: "sm", md: "md" }}
               fontWeight="normal"
               textColor={secondary}
             >
@@ -63,7 +67,11 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
             </Heading>
           </Box>
         </HStack>
-        <Heading fontSize="xl" fontWeight="medium" textColor={accent}>
+        <Heading
+          fontSize={{ base: "md", sm: "lg", md: "xl" }}
+          fontWeight="medium"
+          textColor={accent}
+        >
           {formattedText.split("\n").map((line, i) => (
             <Fragment key={i}>
               {line}
