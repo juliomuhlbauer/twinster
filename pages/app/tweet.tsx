@@ -25,6 +25,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa";
 import { toPng } from "html-to-image";
 import { TwinsterIcon } from "@/theme/icons/twinster";
+import { findTweetId } from "@/utils/find-tweet-id";
 
 const missingIDTweet = {
   id: "error",
@@ -154,7 +155,9 @@ const Editor: FC<Editor> = ({ tweet }) => {
 export default Editor;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.query.id as string;
+  const link = context.query.id as string;
+
+  const id = findTweetId(link);
 
   if (!id) {
     return {
