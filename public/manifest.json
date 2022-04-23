@@ -16,9 +16,7 @@
   "share_target": {
     "action": "/app/tweet",
     "params": {
-      "title": "name",
-      "text": "description",
-      "url": "id"
+      "text": "id"
     }
   }
 }

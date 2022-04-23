@@ -82,7 +82,7 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
         {tweet.media && tweet.media.length ? (
           <SimpleGrid
             columns={tweet.media.length === 1 ? 1 : 2}
-            columnGap={2}
+            spacing={2}
             my={2}
           >
             {tweet.media?.map((media, i) => (
