@@ -65,6 +65,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
       </Head>
+      <SEO />
       <SessionProvider session={pageProps.session}>
         <ChakraProvider theme={theme}>
           {getLayout(<Component {...pageProps} />)}
