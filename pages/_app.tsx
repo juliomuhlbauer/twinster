@@ -8,11 +8,49 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import { SessionProvider } from "next-auth/react";
+import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
+};
+
+export const meta = {
+  title: "Twinster",
+  url: "https://twinster.app",
+  description: "Share your tweets anywhere.",
+  banner: "https://twinste.app/banner.png",
+};
+
+const SEO = () => {
+  // const router = useRouter();
+  return (
+    <DefaultSeo
+      defaultTitle={meta.title}
+      titleTemplate={`%s | Twinster`}
+      description={meta.description}
+      openGraph={{
+        site_name: meta.title,
+        title: meta.title,
+        description: meta.description,
+        // url: meta.url + router.asPath,
+        locale: "en_US",
+        type: "website",
+        images: [
+          {
+            url: meta.banner,
+            width: 1200,
+            height: 630,
+            alt: meta.description,
+          },
+        ],
+      }}
+      twitter={{
+        cardType: "summary_large_image",
+      }}
+    />
+  );
 };
 
 function App({ Component, pageProps }: AppPropsWithLayout) {

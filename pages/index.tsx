@@ -42,7 +42,7 @@ const HomeHeader = () => {
             }
             colorScheme="primary"
           >
-            Sign in with Twitter
+            Sign in
           </Button>
         )}
       </HStack>
@@ -88,6 +88,7 @@ const Home = () => {
                   anywhere
                 </chakra.span>
               </Heading>
+
               <Button
                 bgGradient="linear(to-r,  primary.100, primary.700)"
                 colorScheme="primary"
@@ -95,7 +96,11 @@ const Home = () => {
                 fontWeight="extrabold"
                 fontSize="2xl"
                 size="lg"
-                onClick={() => signIn("twitter")}
+                onClick={() =>
+                  signIn("twitter", {
+                    callbackUrl: "/app",
+                  })
+                }
               >
                 Try it
               </Button>
