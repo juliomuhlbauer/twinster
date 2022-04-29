@@ -1,19 +1,8 @@
 import { Tweet } from "@/components/tweet";
+import { errorTweet } from "@/utils/tweets";
 import { AspectRatio, Button, Center, Stack } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
-
-const errorTweet = {
-  id: "error",
-  author: {
-    name: "Twinster",
-    username: "twinster_app",
-    avatarUrl: "/twinster_social.svg",
-    verified: true,
-  },
-  text: "Nothing to see here. Try another link.",
-  media: [],
-};
 
 const ErrorPage = () => {
   return (

@@ -1,5 +1,8 @@
 import { TweetProps } from "@/types/twitter";
+import { TwitterClient } from "twitter-api-client";
 import {
+  TweetSearchRecentV2Paginator,
+  TweetV1,
   TweetV2,
   Tweetv2FieldsParams,
   TweetV2SingleResult,
@@ -88,4 +91,69 @@ export const getTweet = async (id: string): Promise<TweetProps> => {
   }
 
   return tweetFormatter(tweet);
+};
+
+const getMediaofTweets = (
+  tweets: TweetSearchRecentV2Paginator,
+  tweet: TweetV2
+): TweetProps["media"] => {
+  return (
+    tweet.attachments?.media_keys?.map((key: any) =>
+      tweets.includes?.media?.find((media: any) => media.media_key === key)
+    ) || []
+  );
+};
+
+export const getThread = async (id: string) => {
+  const twitterClient = new TwitterClient({
+    apiKey: process.env.TWITTER_API_KEY || "",
+    apiSecret: process.env.TWITTER_API_KEY_SECRET || "",
+    accessToken: process.env.TWITTER_ACCESS_TOKEN || "",
+    accessTokenSecret: process.env.TWITTER_TOKEN_SECRET || "",
+  });
+
+  const firstTweet = await getTweet(id);
+
+  const authorHandle = firstTweet.author.username;
+
+  const query = `from:${authorHandle} to:${authorHandle} conversation_id:${id}`;
+
+  const queryParams = new URLSearchParams({
+    id,
+    expansions:
+      "author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id",
+    "tweet.fields":
+      "attachments,author_id,public_metrics,created_at,id,in_reply_to_user_id,referenced_tweets,text",
+    "user.fields": "id,name,profile_image_url,protected,url,username,verified",
+    "media.fields":
+      "duration_ms,height,media_key,preview_image_url,type,url,width,public_metrics",
+  });
+
+  // while (!thread.done) {
+  //   await thread.fetchNext();
+  // }
+
+  // const formattedThread: TweetProps[] = thread.tweets
+  //   .reverse()
+  //   .map((tweet) => ({
+  //     text: tweet.text,
+  //     author: firstTweet.author,
+  //     media: getMediaofTweets(thread, tweet),
+  //   }));
+
+  // const tweets = [firstTweet, ...formattedThread];
+
+  // const tweets = await response.json();
+
+  // A UTF-8, URL-encoded search query of 500 characters maximum, including operators of query.
+
+  // const data = await twitterClient.tweets.search({
+  //   q: "from:julio_werner_",
+  // });
+
+  const data = await twitterClient.tweets.search({
+    q: "from:julio_werner_",
+  });
+
+  // return data;
 };

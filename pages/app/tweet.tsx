@@ -1,49 +1,40 @@
 import { Tweet } from "@/components/tweet";
+import { Layout } from "@/layout";
 import { getTweet } from "@/lib/twitter";
+import { themeColors } from "@/theme";
+import { NextLayoutComponentType } from "@/types/app";
 import { Theme, TweetProps } from "@/types/twitter";
+import { findTweetId } from "@/utils/find-tweet-id";
+import { missingIDTweet } from "@/utils/tweets";
 import {
   AspectRatio,
   Box,
-  Button,
   Center,
-  Container,
-  Flex,
   FormLabel,
-  Heading,
   HStack,
   Icon,
   IconButton,
-  Link,
-  Radio,
-  RadioGroup,
+  Select,
   Stack,
 } from "@chakra-ui/react";
-import { GetServerSideProps } from "next";
-import { FC, useCallback, useRef, useState } from "react";
-import NextLink from "next/link";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { FaTwitter } from "react-icons/fa";
 import { toPng } from "html-to-image";
-import { TwinsterIcon } from "@/theme/icons/twinster";
-import { findTweetId } from "@/utils/find-tweet-id";
-
-const missingIDTweet = {
-  id: "error",
-  author: {
-    name: "Twinster",
-    username: "twinster_app",
-    avatarUrl: "/twinster_social.svg",
-    verified: true,
-  },
-  text: "No tweet found. Try another link.",
-  media: [],
-};
+import { GetServerSideProps } from "next";
+import { Session } from "next-auth";
+import { useCallback, useRef, useState } from "react";
+import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
 interface Editor {
   tweet: TweetProps;
+  session: Session;
 }
 
-const Editor: FC<Editor> = ({ tweet }) => {
+const themeIcons = {
+  light: FiSun,
+  darkBlue: FiCloud,
+  dark: FiMoon,
+};
+
+const Editor: NextLayoutComponentType<Editor> = ({ tweet }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [theme, setTheme] = useState<Theme>("darkBlue");
@@ -74,40 +65,6 @@ const Editor: FC<Editor> = ({ tweet }) => {
 
   return (
     <>
-      <HStack
-        justify="space-between"
-        py={2}
-        px={8}
-        borderBottomWidth="1px"
-        borderColor="gray.600"
-      >
-        <HStack spacing={6}>
-          <NextLink href="/app" passHref>
-            <IconButton
-              icon={<Icon as={AiOutlineArrowLeft} />}
-              aria-label="Return"
-            />
-          </NextLink>
-
-          <NextLink href="/app" passHref>
-            <HStack as={Link} variant="button" p={2} textDecoration="none">
-              <TwinsterIcon boxSize={12} />
-              <Heading>Twinster</Heading>
-            </HStack>
-          </NextLink>
-        </HStack>
-
-        <IconButton
-          as={Link}
-          href="https://twitter.com/twinster_app"
-          icon={<Icon as={FaTwitter} boxSize={6} />}
-          aria-label="Twitter"
-          isExternal
-          rounded="full"
-          colorScheme="primary"
-          variant="ghost"
-        />
-      </HStack>
       <Center py={4}>
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
@@ -121,35 +78,74 @@ const Editor: FC<Editor> = ({ tweet }) => {
               </AspectRatio>
             </Box>
           </Box>
-
-          <Box>
+        </Stack>
+      </Center>
+      <Center>
+        <HStack
+          bgColor="bg"
+          boxShadow="lg"
+          p={1}
+          borderRadius="lg"
+          align="center"
+          justify="space-around"
+          pos="fixed"
+          bottom={12}
+          // w="sm"
+          borderWidth="1px"
+          borderColor="gray.700"
+        >
+          {/* <Box>
             <FormLabel>Theme</FormLabel>
-            <RadioGroup
+            <Select
               value={theme}
-              onChange={(value) => {
-                const newTheme = value as Theme;
+              onChange={(e) => {
+                const newTheme = e.target.value as Theme;
                 setTheme(newTheme);
               }}
             >
-              <Stack direction="row">
-                <Radio value="light">Light</Radio>
-                <Radio value="darkBlue">Dark Blue</Radio>
-                <Radio value="dark">Dark</Radio>
-              </Stack>
-            </RadioGroup>
-          </Box>
+              <option value="light">Light</option>
+              <option value="darkBlue">Dark Blue</option>
+              <option value="dark">Dark</option>
+            </Select>
+          </Box> */}
+          <IconButton
+            size="lg"
+            aria-label="Change theme"
+            onClick={() => {
+              const newTheme =
+                theme === "light"
+                  ? "darkBlue"
+                  : theme === "darkBlue"
+                  ? "dark"
+                  : "light";
+              setTheme(newTheme);
+            }}
+            bgColor={themeColors[theme].bg}
+            color={themeColors[theme].accent}
+            _hover={{
+              bgColor: themeColors[theme].bg,
+            }}
+            icon={<Icon as={themeIcons[theme]} />}
+          />
 
-          <Button
+          <IconButton
+            size="lg"
+            aria-label="Download"
+            icon={<Icon as={FiDownload} />}
             onClick={() => onButtonClick()}
             isLoading={isDownloading}
             isDisabled={tweet.id === "error"}
           >
             Download
-          </Button>
-        </Stack>
+          </IconButton>
+        </HStack>
       </Center>
     </>
   );
+};
+
+Editor.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
 };
 
 export default Editor;
@@ -159,26 +155,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const id = findTweetId(link);
 
-  if (!id) {
-    return {
-      props: {
-        tweet: missingIDTweet,
-      },
-    };
+  let tweet = missingIDTweet;
+
+  if (id) {
+    try {
+      tweet = await getTweet(id);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  try {
-    const tweet = await getTweet(id);
-    return {
-      props: {
-        tweet,
-      },
-    };
-  } catch (e) {
-    return {
-      props: {
-        tweet: missingIDTweet,
-      },
-    };
-  }
+  return {
+    props: {
+      tweet,
+    },
+  };
 };

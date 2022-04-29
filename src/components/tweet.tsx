@@ -33,16 +33,15 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
             boxSize={{ base: 10, sm: 12 }}
           />
           <Box>
-            <Heading
-              d="flex"
-              gap={2}
-              alignItems="center"
-              lineHeight="shorter"
-              fontWeight="bold"
-              fontSize={{ base: "md", sm: "lg", md: "xl" }}
-              textColor={accent}
-            >
-              {tweet.author.name}
+            <HStack spacing={1}>
+              <Heading
+                lineHeight="shorter"
+                fontWeight="bold"
+                fontSize={{ base: "md", sm: "lg", md: "xl" }}
+                textColor={accent}
+              >
+                {tweet.author.name}
+              </Heading>
               {tweet.author.verified ? (
                 <chakra.svg
                   aria-label="Verified Account"
@@ -56,7 +55,7 @@ export const Tweet: FC<Tweet> = ({ theme, tweet }) => {
                   </g>
                 </chakra.svg>
               ) : null}
-            </Heading>
+            </HStack>
             <Heading
               lineHeight="shorter"
               fontSize={{ base: "xs", sm: "sm", md: "md" }}

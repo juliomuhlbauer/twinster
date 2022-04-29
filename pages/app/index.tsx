@@ -1,20 +1,25 @@
 import Wizard from "@/components/wizard";
+import { Layout } from "@/layout";
 import { getTweet } from "@/lib/twitter";
+import { NextLayoutComponentType } from "@/types/app";
 import { TweetProps } from "@/types/twitter";
 import { Container } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import { FC } from "react";
 
 interface App {
   dailyTweet: TweetProps;
 }
 
-const App: FC<App> = ({ dailyTweet }) => {
+const App: NextLayoutComponentType<App> = ({ dailyTweet }) => {
   return (
-    <Container maxW="container.sm">
+    <Container maxW="container.sm" pt={12} pb={6}>
       <Wizard dailyTweet={dailyTweet} />
     </Container>
   );
+};
+
+App.getLayout = function getLayout(page) {
+  return <Layout isAppHome>{page}</Layout>;
 };
 
 export default App;

@@ -42,8 +42,10 @@ export const themeColors: Record<Theme, TweetTheme> = {
   },
 };
 
+const primary = base.colors.twitter;
+
 const colors = {
-  primary: base.colors.cyan,
+  primary,
 };
 
 export const theme = extendTheme({
@@ -51,13 +53,13 @@ export const theme = extendTheme({
   fonts,
   semanticTokens: {
     colors: {
-      accent: "#00B5D8",
+      accent: primary[300],
       bg: themeColors.darkBlue.bg,
     },
   },
   styles: globalStyles,
   shadows: {
-    outline: `0 0 0 1px ${twitterColors.blue}`,
+    outline: `0 0 0 1px ${primary[200]}`,
   },
   colors,
   components,
