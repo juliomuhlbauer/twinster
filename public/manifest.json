@@ -10,7 +10,7 @@
   ],
   "theme_color": "#00B5D8",
   "background_color": "#1c2732",
-  "start_url": "/",
+  "start_url": "/app",
   "display": "standalone",
   "orientation": "portrait",
   "share_target": {

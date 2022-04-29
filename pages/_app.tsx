@@ -20,7 +20,7 @@ export const meta = {
   title: "Twinster",
   url: "https://twinster.app",
   description: "Share your tweets anywhere.",
-  banner: "https://twinste.app/banner.png",
+  banner: "https://twinster.app/banner.png",
 };
 
 const SEO = () => {
