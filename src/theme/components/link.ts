@@ -10,6 +10,7 @@ const Link: ComponentSingleStyleConfig = {
         bg: `${props.theme.colors.primary[200]}24`,
       },
       rounded: "md",
+      p: 2,
     }),
   },
 };

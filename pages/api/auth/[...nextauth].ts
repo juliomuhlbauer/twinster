@@ -1,7 +1,10 @@
-import NextAuth from "next-auth";
+import { prisma } from "@/lib/prisma";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import NextAuth, { Awaitable, User } from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
 
 export default NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     TwitterProvider({
       clientId: process.env.TWITTER_API_KEY as string,
@@ -9,4 +12,10 @@ export default NextAuth({
       // version: "2.0",
     }),
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      session.subscribed = user.subscribed;
+      return session;
+    },
+  },
 });

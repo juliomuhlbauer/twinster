@@ -12,7 +12,6 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { FC } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { FaTwitter } from "react-icons/fa";
 import { User } from "../components/user";
 import { Logo } from "./logo";
 
@@ -33,7 +32,7 @@ export const Header: FC<Header> = ({ isAppHome = false }) => {
       >
         <HStack spacing={{ base: 2, md: 6 }}>
           {!isAppHome && (
-            <NextLink href="/app" passHref>
+            <NextLink href="/" passHref>
               <IconButton
                 icon={<Icon as={AiOutlineArrowLeft} />}
                 aria-label="Return"

@@ -11,7 +11,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";

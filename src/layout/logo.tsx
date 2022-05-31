@@ -7,7 +7,7 @@ interface Logo {
   link?: string;
 }
 
-export const Logo: FC<Logo> = ({ link = "/app" }) => {
+export const Logo: FC<Logo> = ({ link = "/" }) => {
   return (
     <NextLink href={link} passHref>
       <HStack

@@ -1,34 +1,6 @@
-import {
-  mode,
-  Styles,
-  SystemStyleFunction,
-  SystemStyleObject,
-} from "@chakra-ui/theme-tools";
+import { Styles, SystemStyleObject } from "@chakra-ui/theme-tools";
 
-export const globalStyles: Styles = {
-  global: (props) => ({
-    "*": {
-      boxSizing: "border-box",
-    },
-    html: {
-      scrollBehavior: "smooth",
-      WebkitTapHighlightColor: "transparent",
-    },
-    body: {
-      bg: mode("gray.100", "bg")(props),
-      color: mode("gray.700", "gray.200")(props),
-    },
-
-    _selection: {
-      color: "white",
-      background: "primary.500",
-    },
-    ...scrollbar(props),
-    ...nProgress,
-  }),
-};
-
-const scrollbar: SystemStyleFunction = (props) => ({
+const scrollbar: SystemStyleObject = {
   "@media (pointer: fine)": {
     "::-webkit-scrollbar": {
       w: "5px",
@@ -36,16 +8,16 @@ const scrollbar: SystemStyleFunction = (props) => ({
     },
     "::-webkit-scrollbar-thumb": {
       rounded: "5px",
-      bgColor: mode("gray.400", "glass.700")(props),
+      bgColor: "gray.600",
     },
     "::-webkit-scrollbar-thumb:hover": {
-      bg: mode("primary.500", "primary.400")(props),
+      bgColor: "gray.400",
     },
     "::-webkit-scrollbar-corner": {
       bg: "transparent",
     },
   },
-});
+};
 
 const nProgress: SystemStyleObject = {
   "#nprogress": {
@@ -59,5 +31,27 @@ const nProgress: SystemStyleObject = {
     left: 0,
     w: "100%",
     h: "1px",
+  },
+};
+
+export const globalStyles: Styles = {
+  global: {
+    "*": {
+      boxSizing: "border-box",
+    },
+    html: {
+      scrollBehavior: "smooth",
+      WebkitTapHighlightColor: "transparent",
+    },
+    body: {
+      color: "text",
+      bgColor: "bg",
+    },
+    _selection: {
+      color: "white",
+      background: "primary.500",
+    },
+    ...scrollbar,
+    ...nProgress,
   },
 };

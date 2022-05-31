@@ -5,8 +5,8 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 
   const url = req.nextUrl.clone();
 
-  if (req.nextUrl.pathname === "/" && token) {
-    url.pathname = "/app";
-    // return NextResponse.redirect(url);
+  if (req.nextUrl.pathname === "/" && !token) {
+    url.pathname = "/home";
+    return NextResponse.rewrite(url);
   }
 }

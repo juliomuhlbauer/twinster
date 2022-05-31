@@ -4,17 +4,17 @@
   "icons": [
     {
       "src": "/twinster.png",
-      "sizes": "192x192",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "theme_color": "#00B5D8",
   "background_color": "#1c2732",
-  "start_url": "/app",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "share_target": {
-    "action": "/app/tweet",
+    "action": "/tweet",
     "params": {
       "text": "id"
     }

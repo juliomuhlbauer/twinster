@@ -20,6 +20,7 @@ import {
 import { toPng } from "html-to-image";
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
+import { getSession } from "next-auth/react";
 import { useCallback, useRef, useState } from "react";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
@@ -82,7 +83,7 @@ const Editor: NextLayoutComponentType<Editor> = ({ tweet }) => {
       </Center>
       <Center>
         <HStack
-          bgColor="bg"
+          // bgColor="bg"
           boxShadow="lg"
           p={1}
           borderRadius="lg"
@@ -156,6 +157,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = findTweetId(link);
 
   let tweet = missingIDTweet;
+
+  const session = await getSession(context);
+
+  // console.log(session);
 
   if (id) {
     try {

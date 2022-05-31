@@ -47,7 +47,7 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
           e.preventDefault();
           if (link) {
             router.push({
-              pathname: "/app/tweet",
+              pathname: "/tweet",
               query: {
                 id: findTweetId(link),
               },
@@ -91,7 +91,7 @@ const Wizard: FC<Wizard> = ({ dailyTweet }) => {
         <Button
           onClick={() => {
             router.push({
-              pathname: "/app/tweet",
+              pathname: "/tweet",
               query: {
                 id: dailyTweet.id,
               },

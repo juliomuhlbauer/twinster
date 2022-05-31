@@ -55,6 +55,7 @@ export const theme = extendTheme({
     colors: {
       accent: primary[300],
       bg: themeColors.darkBlue.bg,
+      text: "gray.200",
     },
   },
   styles: globalStyles,
