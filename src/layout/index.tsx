@@ -13,26 +13,28 @@ const backgroundImage =
 export const Layout: FC<Layout> = ({ children, isAppHome }) => {
   return (
     <Box minH="100vh">
-      <Box
-        pos="absolute"
-        top={-40}
-        left={0}
-        boxSize="4xl"
-        bgGradient="radial(primary.500, transparent)"
-        filter="blur(6em)"
-        zIndex={-1}
-        opacity="0.9"
-      />
-      <Box
-        pos="absolute"
-        right={0}
-        bottom={0}
-        boxSize="3xl"
-        bgGradient="radial(primary.500, transparent)"
-        filter="blur(6em)"
-        zIndex={-1}
-        opacity="0.5"
-      />
+      <Box pos="relative" overflowX="clip">
+        <Box
+          pos="absolute"
+          top={-40}
+          left={0}
+          boxSize="4xl"
+          bgGradient="radial(primary.500, transparent)"
+          filter="blur(6em)"
+          zIndex={-1}
+          opacity="0.9"
+        />
+        <Box
+          pos="absolute"
+          right={0}
+          bottom={0}
+          boxSize="3xl"
+          bgGradient="radial(primary.500, transparent)"
+          filter="blur(6em)"
+          zIndex={-1}
+          opacity="0.5"
+        />
+      </Box>
       <Container maxW="container.lg">
         <Header isAppHome={isAppHome} />
         {children}

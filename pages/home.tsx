@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import NextLink from "next/link";
 import InstagramDemo from "public/home/instagram-demo.png";
 
 const Home: NextPageWithLayout = () => {
@@ -92,6 +91,7 @@ const Home: NextPageWithLayout = () => {
                 layout="fill"
                 objectFit="contain"
                 alt="Illustration"
+                priority
               />
             </Box>
           </Stack>
