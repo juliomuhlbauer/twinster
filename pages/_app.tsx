@@ -1,4 +1,4 @@
-import { pageview } from "@/lib/gtm";
+import { GTM_ID, pageview } from "@/lib/gtm";
 import { theme } from "@/theme";
 import { NextPageWithLayout } from "@/types/app";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -34,15 +34,13 @@ export const meta = {
 };
 
 const Analytics = () => {
-  const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-
-  const router = useRouter();
-  useEffect(() => {
-    router.events.on("routeChangeComplete", pageview);
-    return () => {
-      router.events.off("routeChangeComplete", pageview);
-    };
-  }, [router.events]);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   router.events.on("routeChangeComplete", pageview);
+  //   return () => {
+  //     router.events.off("routeChangeComplete", pageview);
+  //   };
+  // }, [router.events]);
 
   return (
     <>
