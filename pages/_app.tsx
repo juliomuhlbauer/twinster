@@ -34,13 +34,13 @@ export const meta = {
 };
 
 const Analytics = () => {
-  // const router = useRouter();
-  // useEffect(() => {
-  //   router.events.on("routeChangeComplete", pageview);
-  //   return () => {
-  //     router.events.off("routeChangeComplete", pageview);
-  //   };
-  // }, [router.events]);
+  const router = useRouter();
+  useEffect(() => {
+    router.events.on("routeChangeComplete", pageview);
+    return () => {
+      router.events.off("routeChangeComplete", pageview);
+    };
+  }, [router.events]);
 
   return (
     <>
