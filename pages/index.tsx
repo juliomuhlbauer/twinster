@@ -5,7 +5,6 @@ import { NextLayoutComponentType } from "@/types/app";
 import { TweetProps } from "@/types/twitter";
 import { Container } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import { useSession } from "next-auth/react";
 
 interface App {
   dailyTweet: TweetProps;
@@ -13,9 +12,11 @@ interface App {
 
 const App: NextLayoutComponentType<App> = ({ dailyTweet }) => {
   return (
-    <Container maxW="container.sm" pt={12} pb={6}>
-      <Wizard dailyTweet={dailyTweet} />
-    </Container>
+    <>
+      <Container maxW="container.sm" pt={12} pb={6}>
+        <Wizard dailyTweet={dailyTweet} />
+      </Container>
+    </>
   );
 };
 

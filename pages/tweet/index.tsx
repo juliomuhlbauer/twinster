@@ -21,6 +21,7 @@ import { toPng } from "html-to-image";
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
+import { NextSeo } from "next-seo";
 import { useCallback, useRef, useState } from "react";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
@@ -66,6 +67,8 @@ const Editor: NextLayoutComponentType<Editor> = ({ tweet }) => {
 
   return (
     <>
+      <NextSeo title="Editor" />
+
       <Center py={4}>
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">

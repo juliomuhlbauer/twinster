@@ -3,6 +3,7 @@ import { BirdIcon } from "@/theme/icons/bird";
 import { FalconIcon } from "@/theme/icons/falcon";
 import { NextPageWithLayout } from "@/types/app";
 import {
+  Box,
   Button,
   Container,
   Heading,
@@ -20,6 +21,7 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
+import { NextSeo } from "next-seo";
 
 import { MdCheckCircle } from "react-icons/md";
 
@@ -52,75 +54,91 @@ const recurrences: ["monthly", "yearly"] = ["monthly", "yearly"];
 
 const Pricing: NextPageWithLayout = () => {
   return (
-    <Container maxW="container.lg" py={8}>
-      <Stack align="center" spacing={16}>
-        <Heading size="2xl">Pricing</Heading>
+    <>
+      <NextSeo title="Pricing" />
+      <Container maxW="container.lg" py={8}>
+        <Box
+          pos="absolute"
+          top="-350px"
+          right="25px"
+          boxSize="3xl"
+          bgGradient="radial(primary.500, transparent)"
+          filter="blur(6em)"
+          zIndex={-1}
+        />
+        <Stack align="center" spacing={16}>
+          <Heading size="2xl">Pricing</Heading>
 
-        <Tabs
-          variant="solid-rounded"
-          defaultIndex={1}
-          w="100%"
-          colorScheme="primary"
-          size="lg"
-          align="center"
-        >
-          <TabList bgColor="gray.700" w="fit-content" rounded="full">
-            <Tab px={8}>Monthly</Tab>
-            <Tab px={8}>Yearly</Tab>
-          </TabList>
+          <Tabs
+            variant="solid-rounded"
+            defaultIndex={1}
+            w="100%"
+            colorScheme="primary"
+            size="lg"
+            align="center"
+          >
+            <TabList bgColor="gray.700" w="fit-content" rounded="full">
+              <Tab px={8}>Monthly</Tab>
+              <Tab px={8}>Yearly</Tab>
+            </TabList>
 
-          <TabPanels>
-            {recurrences.map((recurrence, index) => (
-              <TabPanel key={index}>
-                <SimpleGrid
-                  spacing={4}
-                  columns={{ base: 1, md: 2 }}
-                  alignItems="normal"
-                  py={8}
-                >
-                  {plans.map((plan, index) => (
-                    <Stack
-                      key={index}
-                      borderWidth={1}
-                      borderColor="gray.600"
-                      rounded="lg"
-                      p={8}
-                      align="center"
-                      spacing={4}
-                    >
-                      <Stack align="center">
-                        <Icon boxSize={12} as={plan.icon} color="primary.200" />
-                        <Heading>{plan.name}</Heading>
-                        <Heading size="lg" color="primary.200">
-                          {`$${plan.price[recurrence]} /mo`}
-                        </Heading>
-                        <Text>{plan.description}</Text>
+            <TabPanels>
+              {recurrences.map((recurrence, index) => (
+                <TabPanel key={index}>
+                  <SimpleGrid
+                    spacing={4}
+                    columns={{ base: 1, md: 2 }}
+                    alignItems="normal"
+                    py={8}
+                  >
+                    {plans.map((plan, index) => (
+                      <Stack
+                        key={index}
+                        borderWidth={1}
+                        borderColor="gray.600"
+                        rounded="lg"
+                        p={8}
+                        align="center"
+                        spacing={4}
+                      >
+                        <Stack align="center">
+                          <Icon
+                            boxSize={12}
+                            as={plan.icon}
+                            color="primary.200"
+                          />
+                          <Heading>{plan.name}</Heading>
+                          <Heading size="lg" color="primary.200">
+                            {`$${plan.price[recurrence]} /mo`}
+                          </Heading>
+                          <Text>{plan.description}</Text>
+                        </Stack>
+                        <List spacing={4}>
+                          {plan.features.map((feature, index) => (
+                            <ListItem key={index} fontSize="xl">
+                              <ListIcon
+                                as={MdCheckCircle}
+                                color="primary.200"
+                                boxSize={6}
+                              />
+                              {feature}
+                            </ListItem>
+                          ))}
+                        </List>
+                        <Spacer />
+                        <Button isDisabled={plan.action === "Comming soon"}>
+                          {plan.action}
+                        </Button>
                       </Stack>
-                      <List spacing={4}>
-                        {plan.features.map((feature, index) => (
-                          <ListItem key={index} fontSize="xl">
-                            <ListIcon
-                              as={MdCheckCircle}
-                              color="primary.200"
-                              boxSize={6}
-                            />
-                            {feature}
-                          </ListItem>
-                        ))}
-                      </List>
-                      <Spacer />
-                      <Button isDisabled={plan.action === "Comming soon"}>
-                        {plan.action}
-                      </Button>
-                    </Stack>
-                  ))}
-                </SimpleGrid>
-              </TabPanel>
-            ))}
-          </TabPanels>
-        </Tabs>
-      </Stack>
-    </Container>
+                    ))}
+                  </SimpleGrid>
+                </TabPanel>
+              ))}
+            </TabPanels>
+          </Tabs>
+        </Stack>
+      </Container>
+    </>
   );
 };
 

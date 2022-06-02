@@ -10,12 +10,14 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import InstagramDemo from "public/home/instagram-demo.png";
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
+      <NextSeo title="Share your tweets anywhere" />
       <Container maxW="container.lg">
         <Box
           pos="absolute"
