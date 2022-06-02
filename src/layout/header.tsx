@@ -44,7 +44,7 @@ export const Header: FC<Header> = ({ isAppHome = false }) => {
           <Logo />
         </HStack>
 
-        <User user={session?.user} />
+        {session && <User user={session?.user} />}
       </HStack>
     </Container>
   );
