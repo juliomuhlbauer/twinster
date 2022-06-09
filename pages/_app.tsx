@@ -1,4 +1,3 @@
-import { GTM_ID, pageview } from "@/lib/gtm";
 import { theme } from "@/theme";
 import { NextPageWithLayout } from "@/types/app";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -13,10 +12,9 @@ import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Router, { useRouter } from "next/router";
-import Script from "next/script";
+import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
 
 import NProgress from "nprogress";
-import { useEffect } from "react";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -31,34 +29,6 @@ export const meta = {
   url: "https://twinster.app",
   description: "Share your tweets anywhere.",
   banner: "https://twinster.app/banner.png",
-};
-
-const Analytics = () => {
-  const router = useRouter();
-  useEffect(() => {
-    router.events.on("routeChangeComplete", pageview);
-    return () => {
-      router.events.off("routeChangeComplete", pageview);
-    };
-  }, [router.events]);
-
-  return (
-    <>
-      <Script
-        id="gtag-base"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', '${GTM_ID}');
-          `,
-        }}
-      />
-    </>
-  );
 };
 
 const SEO = () => {
@@ -94,6 +64,8 @@ const SEO = () => {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  usePagesViews();
+
   return (
     <>
       <Head>
@@ -106,7 +78,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <SEO />
 
-      {process.env.NODE_ENV !== "development" && <Analytics />}
+      {process.env.NODE_ENV !== "development" && (
+        <GoogleAnalytics strategy="afterInteractive" />
+      )}
 
       <SessionProvider session={pageProps.session}>
         <ChakraProvider theme={theme}>
