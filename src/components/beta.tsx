@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
 
 import {
   Box,
@@ -19,20 +18,30 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
+
 import { NoSSR } from "./no-ssr";
+import { useBeta } from "@/hooks/use-beta";
 
 export const Beta = () => {
-  const [isBeta, setBeta] = useLocalStorage("beta-acces", false);
+  const isBeta = useBeta((state) => state.isBeta);
+  const resetBeta = useBeta((state) => state.resetBeta);
+  const activateUser = useBeta((state) => state.activateUser);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [input, setInput] = useState("");
 
+  const toast = useToast();
+
   const password = "dodo";
+
+  const isDev = process.env.NODE_ENV === "development";
 
   return (
     <>
       <NoSSR>
+        {isDev && <Button onClick={() => resetBeta()}>Reset beta</Button>}
         {isBeta ? (
           <Tag size="lg" colorScheme="primary">
             beta user
@@ -79,8 +88,16 @@ export const Beta = () => {
             <Button
               onClick={() => {
                 if (input === password) {
-                  setBeta(true);
+                  activateUser();
                   onClose();
+                  toast({
+                    title: "Beta user activated.",
+                    description: "You can now download 10 threads per month.",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                    position: "top-right",
+                  });
                 }
               }}
             >

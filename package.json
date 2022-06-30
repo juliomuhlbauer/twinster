@@ -29,7 +29,6 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "twitter-api-v2": "^1.12.3",
-    "usehooks-ts": "^2.6.0",
     "zip-lib": "^0.7.3",
     "zustand": "3.7.2"
   },

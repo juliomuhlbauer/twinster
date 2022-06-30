@@ -3,7 +3,7 @@
   "short_name": "Twinster",
   "icons": [
     {
-      "src": "/twinster.png",
+      "src": "/twinster_social.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -18,5 +18,43 @@
     "params": {
       "text": "id"
     }
-  }
+  },
+  "screenshots": [
+    {
+      "src": "/showcase/screenshot_1.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    },
+    {
+      "src": "/showcase/screenshot_2.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    },
+    {
+      "src": "/showcase/screenshot_3.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    },
+    {
+      "src": "/showcase/screenshot_4.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Design a tweet",
+      "short_name": "Tweet",
+      "description": "Open tweet page",
+      "url": "/tweet",
+      "icons": [{ "src": "/twinster_social.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "Design a thread",
+      "short_name": "Thread",
+      "description": "Open thread page",
+      "url": "/thread",
+      "icons": [{ "src": "/twinster_social.png", "sizes": "512x512" }]
+    }
+  ]
 }

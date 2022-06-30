@@ -21,14 +21,14 @@ export const TweetSettings = ({
   theme,
   setTheme,
   canDownload = true,
-  setThreadsDownloaded,
+  onThreadDownload,
 }: {
   tweet?: TweetProps;
   thread?: TweetProps[];
   theme: Theme;
   setTheme: Dispatch<SetStateAction<Theme>>;
   canDownload?: boolean;
-  setThreadsDownloaded?: Dispatch<SetStateAction<number>>;
+  onThreadDownload?: () => void;
 }) => {
   const [isDownloading, setDownloading] = useState(false);
 
@@ -91,9 +91,9 @@ export const TweetSettings = ({
       });
 
       setDownloading(false);
-      setThreadsDownloaded && setThreadsDownloaded((prev) => prev + 1);
+      onThreadDownload && onThreadDownload();
     }
-  }, [setThreadsDownloaded, thread, tweet]);
+  }, [onThreadDownload, thread, tweet]);
 
   return (
     <Center>
