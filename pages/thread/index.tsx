@@ -37,10 +37,7 @@ const ThreadEditor: NextLayoutComponentType<Editor> = ({ thread }) => {
   const onThreadDownload = useBeta((state) => state.onThreadDownload);
 
   const canDownload: boolean = useMemo(
-    () =>
-      (!isBeta && threads.downloaded < 0) ||
-      (isBeta && threads.downloaded < 10) ||
-      threads.downloaded === undefined,
+    () => threads.downloaded < 1 || (isBeta && threads.downloaded < 10),
     [isBeta, threads.downloaded]
   );
 
