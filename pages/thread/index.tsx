@@ -67,7 +67,7 @@ const ThreadEditor: NextLayoutComponentType<Editor> = ({ thread }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isBeta, threadsDownloadedResetAt]);
+  }, [isBeta, threadsDownloadedResetAt, threadsDownloaded]);
 
   return (
     <>
