@@ -31,7 +31,7 @@ const immer =
 
 export const useBeta = create<BetaState>(
   persist(
-    immer((set, get) => ({
+    immer((set) => ({
       isBeta: false,
       threads: {
         downloaded: 0,
