@@ -40,7 +40,7 @@ const ThreadEditor: NextLayoutComponentType<Editor> = ({ thread }) => {
     () =>
       (!isBeta && threads.downloaded < 0) ||
       (isBeta && threads.downloaded < 10) ||
-      threads.downloaded == null,
+      threads.downloaded === null,
     [isBeta, threads.downloaded]
   );
 
