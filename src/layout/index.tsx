@@ -1,5 +1,5 @@
 import { Box, Container } from "@chakra-ui/react";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import { Header } from "./header";
 
 interface Layout {
@@ -35,10 +35,8 @@ export const Layout: FC<Layout> = ({ children, isAppHome }) => {
           opacity="0.5"
         />
       </Box>
-      <Container maxW="container.lg">
-        <Header isAppHome={isAppHome} />
-        {children}
-      </Container>
+      <Header isAppHome={isAppHome} />
+      <Container maxW="container.lg">{children}</Container>
     </Box>
   );
 };

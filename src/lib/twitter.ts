@@ -1,8 +1,7 @@
 import { TweetProps } from "@/types/twitter";
-import { TwitterClient } from "twitter-api-client";
+import { thread7Days } from "@/utils/tweets";
 import {
   TweetSearchRecentV2Paginator,
-  TweetV1,
   TweetV2,
   Tweetv2FieldsParams,
   TweetV2SingleResult,
@@ -53,11 +52,15 @@ const getAuthor = (
 ): TweetProps["author"] => {
   const author = tweet.includes?.users?.find((user) => user.id === author_id);
 
+  const avatarUrl =
+    (author?.profile_image_url || "").slice(0, -10) + "200x200.jpg";
+
   return {
     name: author?.name || "",
     username: author?.username || "",
-    avatarUrl: author?.profile_image_url || "",
+    avatarUrl,
     verified: author?.verified || false,
+    id: author_id || "",
   };
 };
 
@@ -78,6 +81,13 @@ const tweetFormatter = (tweet: TweetV2SingleResult): TweetProps => {
     text: tweet.data.text,
     author,
     media,
+    createdAt: tweet.data.created_at || "",
+    metrics: tweet.data.public_metrics || {
+      like_count: 0,
+      reply_count: 0,
+      retweet_count: 0,
+      quote_count: 0,
+    },
   };
 };
 
@@ -109,6 +119,13 @@ export const getThread = async (id: string): Promise<TweetProps[]> => {
 
   const firstTweet = await getTweet(id);
 
+  if (
+    new Date(firstTweet.createdAt).getTime() <
+    new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+  ) {
+    return [thread7Days];
+  }
+
   const authorHandle = firstTweet.author.username;
 
   const query = `from:${authorHandle} to:${authorHandle} conversation_id:${id}`;
@@ -126,7 +143,15 @@ export const getThread = async (id: string): Promise<TweetProps[]> => {
       text: tweet.text,
       author: firstTweet.author,
       media: getMediaofTweets(thread, tweet),
-    }));
+      createdAt: tweet.created_at || "",
+      metrics: tweet.public_metrics || {
+        like_count: 0,
+        reply_count: 0,
+        retweet_count: 0,
+        quote_count: 0,
+      },
+    }))
+    .slice(0, 9);
 
   const tweets = [firstTweet, ...formattedThread];
 

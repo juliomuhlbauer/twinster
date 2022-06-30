@@ -14,7 +14,7 @@ const ErrorPage = () => {
       <Center minH="100vh">
         <Stack>
           <AspectRatio w="lg">
-            <Tweet theme="darkBlue" tweet={errorTweet} />
+            <Tweet theme="darkBlue" tweet={errorTweet} aspect="1:1" />
           </AspectRatio>
           <NextLink href="/" passHref>
             <Button>Go home</Button>

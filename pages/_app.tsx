@@ -7,7 +7,6 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
-import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -35,7 +34,7 @@ const SEO = () => {
   const router = useRouter();
   return (
     <DefaultSeo
-      defaultTitle={meta.title}
+      defaultTitle={"Share your tweets anywhere | Twinster"}
       titleTemplate={`%s | Twinster`}
       description={meta.description}
       openGraph={{
@@ -56,6 +55,7 @@ const SEO = () => {
       }}
       twitter={{
         cardType: "summary_large_image",
+        handle: "@twinster_app",
       }}
     />
   );
@@ -82,11 +82,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         <GoogleAnalytics strategy="afterInteractive" />
       )}
 
-      <SessionProvider session={pageProps.session}>
-        <ChakraProvider theme={theme}>
-          {getLayout(<Component {...pageProps} />)}
-        </ChakraProvider>
-      </SessionProvider>
+      <ChakraProvider theme={theme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ChakraProvider>
     </>
   );
 }

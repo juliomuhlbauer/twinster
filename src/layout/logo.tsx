@@ -1,6 +1,6 @@
 import { FC } from "react";
 import NextLink from "next/link";
-import { Heading, HStack, Link } from "@chakra-ui/react";
+import { Heading, HStack, Link, Stack, Tag } from "@chakra-ui/react";
 import { TwinsterIcon } from "@/theme/icons/twinster";
 
 interface Logo {
@@ -20,13 +20,16 @@ export const Logo: FC<Logo> = ({ link = "/" }) => {
         }}
       >
         <TwinsterIcon boxSize={12} />
-        <Heading
-          _groupHover={{
-            color: "primary.200",
-          }}
-        >
-          Twinster
-        </Heading>
+        <Stack align="end" spacing={0}>
+          <Heading
+            _groupHover={{
+              color: "primary.200",
+            }}
+            size="xl"
+          >
+            twinster
+          </Heading>
+        </Stack>
       </HStack>
     </NextLink>
   );

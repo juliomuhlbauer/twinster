@@ -9,9 +9,9 @@ import {
   Link,
   Stack,
 } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
+import NextLink from "next/link";
 import InstagramDemo from "public/home/instagram-demo.png";
 
 const Home: NextPageWithLayout = () => {
@@ -48,7 +48,7 @@ const Home: NextPageWithLayout = () => {
                 fontWeight="extrabold"
                 textAlign={{ base: "center", lg: "left" }}
               >
-                Share your <br />
+                share your <br />
                 <chakra.span
                   bgClip="text"
                   bgGradient="linear(to-r,  primary.100, primary.700)"
@@ -64,22 +64,19 @@ const Home: NextPageWithLayout = () => {
                 </chakra.span>
               </Heading>
 
-              {/* <NextLink href="/" passHref> */}
-              <Button
-                // as={Link}
-                onClick={() => {
-                  signIn("twitter");
-                }}
-                bgGradient="linear(to-r,  primary.100, primary.700)"
-                colorScheme="primary"
-                px={{ base: 24, sm: 36, lg: 48 }}
-                fontWeight="extrabold"
-                fontSize="2xl"
-                size="lg"
-              >
-                Try it
-              </Button>
-              {/* </NextLink> */}
+              <NextLink href="/" passHref>
+                <Button
+                  as={Link}
+                  bgGradient="linear(to-r,  primary.100, primary.700)"
+                  colorScheme="primary"
+                  px={{ base: 24, sm: 36, lg: 48 }}
+                  fontWeight="extrabold"
+                  fontSize="2xl"
+                  size="lg"
+                >
+                  try it
+                </Button>
+              </NextLink>
             </Stack>
 
             <Box
