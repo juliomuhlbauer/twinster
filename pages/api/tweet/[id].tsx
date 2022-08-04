@@ -5,7 +5,6 @@ import { theme } from "@/theme";
 import { Theme } from "@/types/twitter";
 import { welcomeTweet } from "@/utils/tweets";
 import { ChakraProvider } from "@chakra-ui/react";
-import { toPng } from "html-to-image";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as ReactDOMServer from "react-dom/server";
 
