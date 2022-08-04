@@ -34,7 +34,7 @@ const SEO = () => {
   const router = useRouter();
   return (
     <DefaultSeo
-      defaultTitle={"Share your tweets anywhere | Twinster"}
+      defaultTitle={"Twinster | Share your tweets anywhere"}
       titleTemplate={`%s | Twinster`}
       description={meta.description}
       openGraph={{

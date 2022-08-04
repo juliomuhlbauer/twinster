@@ -55,7 +55,23 @@ export const Beta = () => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent
+          as="form"
+          onSubmit={() => {
+            if (input === password) {
+              activateUser();
+              onClose();
+              toast({
+                title: "Beta user activated.",
+                description: "You can now download 10 threads per month.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+                position: "top-right",
+              });
+            }
+          }}
+        >
           <ModalHeader>Beta</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -85,24 +101,7 @@ export const Beta = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              onClick={() => {
-                if (input === password) {
-                  activateUser();
-                  onClose();
-                  toast({
-                    title: "Beta user activated.",
-                    description: "You can now download 10 threads per month.",
-                    status: "success",
-                    duration: 3000,
-                    isClosable: true,
-                    position: "top-right",
-                  });
-                }
-              }}
-            >
-              Enter
-            </Button>
+            <Button type="submit">Enter</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

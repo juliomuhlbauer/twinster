@@ -2,6 +2,7 @@ import { FC } from "react";
 import NextLink from "next/link";
 import { Heading, HStack, Link, Stack, Tag } from "@chakra-ui/react";
 import { TwinsterIcon } from "@/theme/icons/twinster";
+import React from "react";
 
 interface Logo {
   link?: string;

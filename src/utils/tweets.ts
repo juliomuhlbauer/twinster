@@ -4,7 +4,8 @@ const twinsterAuthor = {
   id: "twinster",
   name: "twinster",
   username: "twinster_app",
-  avatarUrl: "/twinster_social.svg",
+  avatarUrl:
+    "https://pbs.twimg.com/profile_images/1525091708060459008/Y9WpzAku_400x400.jpg",
   verified: true,
 };
 

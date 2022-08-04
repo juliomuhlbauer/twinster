@@ -1,6 +1,6 @@
-import produce, { Draft } from "immer";
-import create, { State, StateCreator } from "zustand";
+import create from "zustand";
 import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
 interface BetaState {
   isBeta: boolean;
@@ -14,22 +14,7 @@ interface BetaState {
   resetThreadDownloaded: () => void;
 }
 
-const immer =
-  <T extends State>(config: StateCreator<T>): StateCreator<T> =>
-  (set, get, api) =>
-    config(
-      (partial, replace) => {
-        const nextState =
-          typeof partial === "function"
-            ? produce(partial as (state: Draft<T>) => T)
-            : (partial as T);
-        return set(nextState, replace);
-      },
-      get,
-      api
-    );
-
-export const useBeta = create<BetaState>(
+export const useBeta = create<BetaState>()(
   persist(
     immer((set) => ({
       isBeta: false,

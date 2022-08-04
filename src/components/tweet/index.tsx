@@ -18,6 +18,7 @@ interface Tweet {
   tweet: TweetProps;
   theme: Theme;
   aspect: "1:1" | "4:5" | "4:3";
+  isResponsive?: boolean;
 }
 
 const aspects = {
@@ -35,14 +36,18 @@ const aspects = {
   },
 };
 
-export const Tweet: FC<Tweet> = ({ theme, tweet, aspect = "4:5" }) => {
+export const Tweet: FC<Tweet> = ({
+  theme,
+  tweet,
+  aspect = "4:5",
+  isResponsive = true,
+}) => {
+  const size = useBreakpointValue({ base: 0.3, sm: 0.4, md: 0.5 });
+
   const textRef = useRef<HTMLDivElement>(null);
   const textDimensions = useDimensions(textRef);
 
   const [imageHeight, setImageHeight] = useState(0);
-  const size = useBreakpointValue({ base: 1.2, sm: 1.5, md: 2 });
-
-  const sizes = [1.2, 1.5, 2];
 
   const { accent, bg, secondary } = themeColors[theme];
 
@@ -51,42 +56,37 @@ export const Tweet: FC<Tweet> = ({ theme, tweet, aspect = "4:5" }) => {
   const width = aspects[aspect].width;
   const height = aspects[aspect].height;
 
-  const generateSizes = (size: number, suffix?: string) => {
-    if (suffix) {
-      return sizes.map((s) => `${s * size}${suffix}`);
-    }
-
-    return sizes.map((s) => s * size);
-  };
-
   useEffect(() => {
-    if (size && textDimensions) {
-      const contentHeight = (size * width * 1080) / 4;
+    if (textDimensions) {
+      const contentHeight = width * 1080 - 180;
       const textHeight = textDimensions.borderBox.height;
 
       setImageHeight(contentHeight - textHeight);
     }
-  }, [size, textDimensions, width]);
+  }, [textDimensions, width]);
 
   return (
     <Center
+      sx={{
+        zoom: isResponsive ? size : 1,
+      }}
       bgColor={bg}
-      w={generateSizes((width * 1080) / 4)}
-      h={generateSizes((height * 1080) / 4)}
-      p={generateSizes((width * 1080) / 40)}
+      p="90px"
+      w={width * 1080 + "px"}
+      h={height * 1080 + "px"}
     >
-      <Stack spacing={generateSizes(8, "px")}>
-        <Stack ref={textRef} spacing={generateSizes(8, "px")}>
+      <Stack spacing="24px">
+        <Stack ref={textRef} spacing="24px">
           <HStack align="center">
-            <Img
+            <chakra.img
               src={tweet.author.avatarUrl}
               borderRadius="full"
-              boxSize={generateSizes(24, "px")}
+              boxSize="120px"
             />
             <Box>
-              <Heading
-                fontSize={generateSizes(2.375 / 4, "rem")}
-                lineHeight={1.4}
+              <chakra.h2
+                fontSize="32px"
+                lineHeight={"38px"}
                 fontWeight="bold"
                 textColor={accent}
                 noOfLines={1}
@@ -97,9 +97,9 @@ export const Tweet: FC<Tweet> = ({ theme, tweet, aspect = "4:5" }) => {
 
                 {tweet.author.verified ? (
                   <chakra.svg
-                    mx={generateSizes(2, "px")}
+                    mx={1}
                     aria-label="Verified Account"
-                    boxSize={generateSizes(8, "px")}
+                    boxSize="24px"
                     color={accent}
                     viewBox="0 0 24 24"
                   >
@@ -108,22 +108,22 @@ export const Tweet: FC<Tweet> = ({ theme, tweet, aspect = "4:5" }) => {
                     </g>
                   </chakra.svg>
                 ) : null}
-              </Heading>
+              </chakra.h2>
 
-              <Heading
-                fontSize={generateSizes(2.375 / 4.5, "rem")}
-                lineHeight={1.4}
+              <chakra.h3
+                fontSize={"32px"}
+                lineHeight={"38px"}
                 fontWeight="normal"
                 textColor={secondary}
                 noOfLines={1}
               >
                 @{tweet.author.username}
-              </Heading>
+              </chakra.h3>
             </Box>
           </HStack>
-          <Heading
-            fontSize={generateSizes(2.375 / 4, "rem")}
-            lineHeight={1.4}
+          <chakra.p
+            fontSize={"38px"}
+            lineHeight={"52px"}
             fontWeight="medium"
             textColor={accent}
           >
@@ -133,26 +133,20 @@ export const Tweet: FC<Tweet> = ({ theme, tweet, aspect = "4:5" }) => {
                 <br />
               </Fragment>
             ))}
-          </Heading>
+          </chakra.p>
         </Stack>
 
         {tweet.media && tweet.media.length ? (
           <SimpleGrid
+            h={imageHeight + "px"}
             columns={tweet.media.length === 1 ? 1 : 2}
-            spacing={2}
-            my={2}
+            spacing="24px"
             alignSelf="center"
             alignContent="center"
             w="100%"
           >
             {tweet.media?.map((media, i) => (
-              <Img
-                key={i}
-                src={media?.url}
-                h={imageHeight}
-                objectFit="contain"
-                w="100%"
-              />
+              <Img key={i} src={media?.url} objectFit="contain" w="100%" />
             ))}
           </SimpleGrid>
         ) : null}

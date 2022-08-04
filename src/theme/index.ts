@@ -59,9 +59,6 @@ export const theme = extendTheme({
     },
   },
   styles: globalStyles,
-  shadows: {
-    outline: `0 0 0 1px ${primary[200]}`,
-  },
   colors,
   components,
 });

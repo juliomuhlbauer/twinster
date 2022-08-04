@@ -52,8 +52,10 @@ const getAuthor = (
 ): TweetProps["author"] => {
   const author = tweet.includes?.users?.find((user) => user.id === author_id);
 
-  const avatarUrl =
-    (author?.profile_image_url || "").slice(0, -10) + "200x200.jpg";
+  const avatarUrl = (author?.profile_image_url || "").replace(
+    "200x200",
+    "400x400"
+  );
 
   return {
     name: author?.name || "",

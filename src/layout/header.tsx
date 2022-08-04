@@ -1,6 +1,5 @@
 import { Beta } from "@/components/beta";
 import { Container, HStack, Icon, IconButton } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { FC } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
