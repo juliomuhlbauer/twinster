@@ -84,13 +84,13 @@ export const Tweet: FC<Tweet> = ({
       >
         <Stack spacing="24px">
           <Stack ref={textRef} spacing="24px">
-            <HStack align="center" spacing="16px">
+            <HStack align="center" spacing="24px">
               <chakra.img
                 src={tweet.author.avatarUrl}
                 borderRadius="full"
                 boxSize="120px"
               />
-              <Box>
+              <Stack spacing="4px">
                 <chakra.h2
                   fontSize="32px"
                   lineHeight="38px"
@@ -104,7 +104,7 @@ export const Tweet: FC<Tweet> = ({
 
                   {tweet.author.verified ? (
                     <chakra.svg
-                      mx={2}
+                      mx="4px"
                       aria-label="Verified Account"
                       boxSize="32px"
                       color={accent}
@@ -126,7 +126,7 @@ export const Tweet: FC<Tweet> = ({
                 >
                   @{tweet.author.username}
                 </chakra.h3>
-              </Box>
+              </Stack>
             </HStack>
             <chakra.p
               fontSize={"38px"}
