@@ -8,10 +8,10 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import { DefaultSeo } from "next-seo";
-import type { AppProps } from "next/app";
+import type { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import Router, { useRouter } from "next/router";
-import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
+import { event, GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
 
 import NProgress from "nprogress";
 
@@ -87,6 +87,20 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       </ChakraProvider>
     </>
   );
+}
+
+export function reportWebVitals({
+  id,
+  name,
+  label,
+  value,
+}: NextWebVitalsMetric) {
+  event(name, {
+    category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+    value: Math.round(name === "CLS" ? value * 1000 : value),
+    label: id,
+    nonInteraction: true,
+  });
 }
 
 export default App;
