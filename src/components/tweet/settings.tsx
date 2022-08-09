@@ -4,6 +4,7 @@ import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
 import { toBlob } from "html-to-image";
 import JSZip from "jszip";
+import { event } from "nextjs-google-analytics";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
@@ -56,6 +57,11 @@ export const TweetSettings = ({
           console.error(err);
         });
 
+      event("download_tweet", {
+        label: tweet.id,
+        category: "tweet",
+      });
+
       setDownloading(false);
     }
 
@@ -90,6 +96,11 @@ export const TweetSettings = ({
 
       zip.generateAsync({ type: "blob" }).then((blob) => {
         saveAs(blob, `twinster_${thread[0].text.slice(0, 20)}.zip`);
+      });
+
+      event("download_thread", {
+        label: thread[0].id,
+        category: "thread",
       });
 
       setDownloading(false);

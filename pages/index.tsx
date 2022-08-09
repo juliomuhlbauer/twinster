@@ -20,6 +20,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { event } from "nextjs-google-analytics";
 import { useState } from "react";
 import { FiArrowRight, FiSearch } from "react-icons/fi";
 
@@ -35,6 +36,18 @@ const Editor: NextPageWithLayout = () => {
 
   const fetchTweet = () => {
     if (link) {
+      if (type === "tweet") {
+        event("fetch_tweet", {
+          label: findTweetId(link),
+          category: "tweet",
+        });
+      } else if (type === "thread") {
+        event("fetch_thread", {
+          label: findTweetId(link),
+          category: "thread",
+        });
+      }
+
       router.push({
         pathname: "/" + type,
         query: {

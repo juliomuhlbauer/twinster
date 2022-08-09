@@ -6,8 +6,8 @@ export const Watermark = () => {
     <HStack
       p={2}
       position="absolute"
-      right={4}
-      bottom={4}
+      right={0}
+      bottom={0}
       spacing={1}
       opacity={0.75}
     >
