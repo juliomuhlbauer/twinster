@@ -1,17 +1,19 @@
 import { Tweet } from "@/components/tweet";
 import { getTweet } from "@/lib/twitter";
 import { TweetProps } from "@/types/twitter";
-import { Heading } from "@chakra-ui/react";
+import { Container, Heading, Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 
 const Gallery = ({ tweets }: { tweets: TweetProps[] }) => {
   return (
-    <>
-      <Heading>Gallery</Heading>
-      {tweets.map((tweet) => (
-        <Tweet key={tweet.id} aspect="4:5" theme="light" tweet={tweet} />
-      ))}
-    </>
+    <Container py={8}>
+      <Stack spacing={8} align="center">
+        <Heading>Gallery</Heading>
+        {tweets.map((tweet) => (
+          <Tweet key={tweet.id} aspect="4:5" theme="light" tweet={tweet} />
+        ))}
+      </Stack>
+    </Container>
   );
 };
 

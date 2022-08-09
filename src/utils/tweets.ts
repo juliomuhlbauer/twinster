@@ -6,7 +6,7 @@ const twinsterAuthor = {
   username: "twinster_app",
   avatarUrl:
     "https://pbs.twimg.com/profile_images/1525091708060459008/Y9WpzAku_400x400.jpg",
-  verified: true,
+  verified: false,
 };
 
 export const missingIDTweet: TweetProps = {

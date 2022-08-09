@@ -1,4 +1,5 @@
-import { Styles, SystemStyleObject } from "@chakra-ui/theme-tools";
+import { SystemStyleObject } from "@chakra-ui/react";
+import { Styles } from "@chakra-ui/theme-tools";
 
 const scrollbar: SystemStyleObject = {
   "@media (pointer: fine)": {

@@ -1,5 +1,5 @@
 import { Layout } from "@/marketing/layout";
-import { NextPageWithLayout } from "@/types/app";
+import { NextPageWithLayout } from "@/types/next";
 import {
   Box,
   Button,

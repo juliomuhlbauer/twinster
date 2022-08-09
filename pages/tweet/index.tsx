@@ -2,7 +2,7 @@ import { Tweet } from "@/components/tweet";
 import { TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
 import { getTweet } from "@/lib/twitter";
-import { NextLayoutComponentType } from "@/types/app";
+import { NextPageWithLayout } from "@/types/next";
 import { Theme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
 import { missingIDTweet } from "@/utils/tweets";
@@ -15,7 +15,7 @@ interface Editor {
   tweet: TweetProps;
 }
 
-const TweetEditor: NextLayoutComponentType<Editor> = ({ tweet }) => {
+const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
   const [theme, setTheme] = useState<Theme>("darkBlue");
 
   return (
@@ -26,7 +26,7 @@ const TweetEditor: NextLayoutComponentType<Editor> = ({ tweet }) => {
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
             <Box id={`tweet-${tweet.id}`}>
-              <Tweet theme={theme} tweet={tweet} aspect="4:5" />
+              <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
             </Box>
           </Box>
         </Stack>

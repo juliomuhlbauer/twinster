@@ -1,6 +1,6 @@
 import { Tweet } from "@/components/tweet";
 import { Layout } from "@/layout";
-import { NextLayoutComponentType } from "@/types/app";
+import { NextPageWithLayout } from "@/types/next";
 import { findTweetId } from "@/utils/find-tweet-id";
 import { welcomeTweet } from "@/utils/tweets";
 import {
@@ -25,7 +25,7 @@ import { FiArrowRight, FiSearch } from "react-icons/fi";
 
 const types: ["tweet", "thread"] = ["tweet", "thread"];
 
-const Editor: NextLayoutComponentType = () => {
+const Editor: NextPageWithLayout = () => {
   const [inputFocus, setInputFocus] = useState(false);
 
   const [link, setLink] = useState("");

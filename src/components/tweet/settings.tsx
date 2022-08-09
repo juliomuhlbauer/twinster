@@ -57,7 +57,9 @@ export const TweetSettings = ({
         });
 
       setDownloading(false);
-    } else if (thread) {
+    }
+
+    if (thread) {
       const blobs = thread.map(async (tweet, index) => {
         const ref = document.getElementById(`tweet-${tweet.id}`);
 

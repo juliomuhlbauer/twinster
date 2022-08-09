@@ -1,5 +1,5 @@
 import { theme } from "@/theme";
-import { NextPageWithLayout } from "@/types/app";
+import { NextPageWithLayout } from "@/types/next";
 import { ChakraProvider } from "@chakra-ui/react";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";

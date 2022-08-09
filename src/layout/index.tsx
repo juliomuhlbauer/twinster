@@ -36,7 +36,9 @@ export const Layout: FC<Layout> = ({ children, isAppHome }) => {
         />
       </Box>
       <Header isAppHome={isAppHome} />
-      <Container maxW="container.lg">{children}</Container>
+      <Container maxW="container.lg" pb={36}>
+        {children}
+      </Container>
     </Box>
   );
 };

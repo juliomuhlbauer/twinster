@@ -1,18 +1,12 @@
 import { NoSSR } from "@/components/no-ssr";
 import { Tweet } from "@/components/tweet";
 import { TweetSettings } from "@/components/tweet/settings";
-import { useBeta } from "@/hooks/use-beta";
 import { Layout } from "@/layout";
 import { getThread } from "@/lib/twitter";
-import { NextLayoutComponentType } from "@/types/app";
+import { NextPageWithLayout } from "@/types/next";
 import { Theme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
-import {
-  errorTweet,
-  missingIDTweet,
-  thread7Days,
-  welcomeTweet,
-} from "@/utils/tweets";
+import { missingIDTweet, thread7Days } from "@/utils/tweets";
 import {
   Alert,
   AlertDescription,
@@ -21,58 +15,20 @@ import {
   Box,
   Button,
   Center,
-  Circle,
   Heading,
-  HStack,
-  Icon,
-  IconButton,
   Link,
   Stack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { useEffect, useMemo, useState } from "react";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 interface Editor {
   thread: TweetProps[];
 }
 
-const ThreadEditor: NextLayoutComponentType<Editor> = ({ thread }) => {
+const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
   const [theme, setTheme] = useState<Theme>("darkBlue");
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  const isBeta = useBeta((state) => state.isBeta);
-  const threads = useBeta((state) => state.threads);
-  const resetThreadDownloaded = useBeta((state) => state.resetThreadDownloaded);
-  const onThreadDownload = useBeta((state) => state.onThreadDownload);
-
-  const canDownload: boolean = useMemo(
-    () => isBeta && threads.downloaded < 10,
-    [isBeta, threads.downloaded]
-  );
-
-  useEffect(() => {
-    if (threads.resetedMonth !== new Date().getMonth()) {
-      resetThreadDownloaded();
-    }
-  }, [resetThreadDownloaded, threads.resetedMonth]);
-
-  const nextSlide = () => {
-    if (activeSlide + 1 === thread.length) {
-      setActiveSlide(0);
-    } else {
-      setActiveSlide((active) => active + 1);
-    }
-  };
-
-  const previousSlide = () => {
-    if (activeSlide === 0) {
-      setActiveSlide(thread.length - 1);
-    } else {
-      setActiveSlide((active) => active - 1);
-    }
-  };
 
   return (
     <>
@@ -82,7 +38,7 @@ const ThreadEditor: NextLayoutComponentType<Editor> = ({ thread }) => {
         <Stack spacing={4} align="center" mb={48}>
           <Heading size="md"></Heading>
 
-          <NoSSR>
+          {/* <NoSSR>
             <Alert status="warning">
               <Stack align="center">
                 <AlertIcon mr={0} boxSize={6} />
@@ -107,71 +63,23 @@ const ThreadEditor: NextLayoutComponentType<Editor> = ({ thread }) => {
                 </Button>
               </Stack>
             </Alert>
-          </NoSSR>
+          </NoSSR> */}
 
-          <HStack>
-            <IconButton
-              aria-label="previous"
-              display="none"
-              sx={{
-                "@media(pointer: fine)": {
-                  display: "block",
-                },
-              }}
-              icon={<Icon as={FiArrowLeft} />}
-              onClick={() => previousSlide()}
-            />
-            <HStack
-              // maxW={generateSizes((1 * 1080) / 4, "px")}
-              overflow="auto"
-              scrollSnapType="x mandatory"
-            >
-              {thread.map((tweet, index) => (
-                <Box
-                  key={index}
-                  scrollSnapAlign="center"
-                  scrollSnapStop="always"
-                  //  p={2} borderWidth="1px" borderRadius="lg"
-                >
-                  <Box id={`tweet-${index}`}>
-                    <Tweet theme={theme} tweet={tweet} aspect="4:5" />
-                  </Box>
-                </Box>
-              ))}
-            </HStack>
-            <IconButton
-              aria-label="next"
-              display="none"
-              sx={{
-                "@media(pointer: fine)": {
-                  display: "block",
-                },
-              }}
-              onClick={() => nextSlide()}
-              icon={<Icon as={FiArrowRight} />}
-            />
-          </HStack>
-
-          <HStack>
-            {thread.map((tweet, index) => {
-              return (
-                <Circle
-                  size={2}
-                  key={index}
-                  bgColor={activeSlide === index ? "primary.200" : "gray.500"}
-                  onClick={() => setActiveSlide(index)}
-                />
-              );
-            })}
-          </HStack>
+          {thread.map((tweet, index) => (
+            <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
+              <Box id={`tweet-${tweet.id}`}>
+                <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
+              </Box>
+            </Box>
+          ))}
         </Stack>
       </Center>
       <TweetSettings
         theme={theme}
         setTheme={setTheme}
         thread={thread}
-        canDownload={canDownload}
-        onThreadDownload={onThreadDownload}
+        // canDownload={canDownload}
+        // onThreadDownload={onThreadDownload}
       />
     </>
   );

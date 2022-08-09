@@ -21,13 +21,8 @@ import {
 import { useToast } from "@chakra-ui/react";
 
 import { NoSSR } from "./no-ssr";
-import { useBeta } from "@/hooks/use-beta";
 
 export const Beta = () => {
-  const isBeta = useBeta((state) => state.isBeta);
-  const resetBeta = useBeta((state) => state.resetBeta);
-  const activateUser = useBeta((state) => state.activateUser);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [input, setInput] = useState("");
@@ -40,7 +35,7 @@ export const Beta = () => {
 
   return (
     <>
-      <NoSSR>
+      {/* <NoSSR>
         {isDev && <Button onClick={() => resetBeta()}>Reset beta</Button>}
         {isBeta ? (
           <Tag size="lg" colorScheme="primary">
@@ -104,7 +99,7 @@ export const Beta = () => {
             <Button type="submit">Enter</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   );
 };
