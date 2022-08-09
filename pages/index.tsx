@@ -18,6 +18,7 @@ import {
   Tab,
   TabList,
   Tabs,
+  Tag,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { event } from "nextjs-google-analytics";
@@ -84,7 +85,14 @@ const Editor: NextPageWithLayout = () => {
                       color: "primary.900",
                     }}
                   >
-                    {type}
+                    {type === "tweet" ? (
+                      "Tweet"
+                    ) : (
+                      <>
+                        Thread
+                        <Tag mx={2}>beta</Tag>
+                      </>
+                    )}
                   </Tab>
                 ))}
               </TabList>

@@ -53,7 +53,7 @@ const getAuthor = (
   const author = tweet.includes?.users?.find((user) => user.id === author_id);
 
   const avatarUrl = (author?.profile_image_url || "").replace(
-    "200x200",
+    "normal",
     "400x400"
   );
 
