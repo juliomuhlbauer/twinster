@@ -133,8 +133,8 @@ const Editor: NextPageWithLayout = () => {
                   />
                   <InputRightElement>
                     <IconButton
+                      type="submit"
                       aria-label="search"
-                      onClick={() => fetchTweet()}
                       icon={<Icon as={FiArrowRight} />}
                       borderRadius="full"
                       variant="ghost"
