@@ -12,8 +12,6 @@ interface GaleryProps {
 }
 
 const Gallery: NextPage<GaleryProps> = ({ galleryTweets }) => {
-  console.log(galleryTweets);
-
   return (
     <Container py={8}>
       <Stack spacing={8} align="center">
