@@ -4,6 +4,7 @@ import {
   TweetSearchRecentV2Paginator,
   TweetV2,
   Tweetv2FieldsParams,
+  TweetV2LookupResult,
   TweetV2SingleResult,
   TwitterApi,
 } from "twitter-api-v2";
@@ -78,18 +79,28 @@ const tweetFormatter = (tweet: TweetV2SingleResult): TweetProps => {
   const author = getAuthor(tweet, tweet.data.author_id);
   const media = getMedia(tweet);
 
+  // const quoteTweetId =
+  //   tweet.data.referenced_tweets &&
+  //   tweet.includes?.tweets?.find(
+  //     (t) =>
+  //       t.id ===
+  //       tweet.data.referenced_tweets.find((t) => t.type === "quoted")?.id
+  //   );
+
   return {
     id: tweet.data.id,
     text: tweet.data.text,
     author,
     media,
     createdAt: tweet.data.created_at || "",
+    // quoteTweet: quoteTweet || {},
     metrics: tweet.data.public_metrics || {
       like_count: 0,
       reply_count: 0,
       retweet_count: 0,
       quote_count: 0,
     },
+    // all: tweet,
   };
 };
 
@@ -103,6 +114,73 @@ export const getTweet = async (id: string): Promise<TweetProps> => {
   }
 
   return tweetFormatter(tweet);
+};
+
+const getAuthorTweets = (
+  tweet: TweetV2LookupResult,
+  author_id: TweetV2["author_id"]
+): TweetProps["author"] => {
+  const author = tweet.includes?.users?.find((user) => user.id === author_id);
+
+  const avatarUrl = (author?.profile_image_url || "").replace(
+    "normal",
+    "400x400"
+  );
+
+  return {
+    name: author?.name || "",
+    username: author?.username || "",
+    avatarUrl,
+    verified: author?.verified || false,
+    id: author_id || "",
+  };
+};
+
+const getMediaTweets = (
+  tweets: TweetV2LookupResult,
+  tweet: TweetV2
+): TweetProps["media"] => {
+  return (
+    tweet.attachments?.media_keys?.map((key: any) =>
+      tweets.includes?.media?.find((media: any) => media.media_key === key)
+    ) || []
+  );
+};
+
+const tweetsFormatter = (tweets: TweetV2LookupResult): TweetProps[] => {
+  const formatedTweests = tweets.data.map((tweet) => {
+    const author = getAuthorTweets(tweets, tweet.author_id);
+
+    const media = getMediaTweets(tweets, tweet);
+
+    return {
+      id: tweet.id,
+      text: tweet.text,
+      author,
+      media,
+      createdAt: tweet.created_at || "",
+      metrics: tweet.public_metrics || {
+        like_count: 0,
+        reply_count: 0,
+        retweet_count: 0,
+        quote_count: 0,
+      },
+    };
+  });
+
+  return formatedTweests;
+};
+
+export const getTweets = async (ids: string[]): Promise<TweetProps[]> => {
+  const twitterClient = new TwitterApi(process.env.TWITTER_BEARER_TOKEN || "");
+
+  const tweet = await twitterClient.v2.tweets(ids, tweetParams);
+
+  if (tweet.errors) {
+    throw new Error("error fetching tweets");
+  }
+
+  return tweetsFormatter(tweet);
 };
 
 const getMediaofTweets = (

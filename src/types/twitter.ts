@@ -17,6 +17,5 @@ export type TweetProps = {
   media: (MediaObjectV2 | undefined)[];
   createdAt: string;
   metrics: TweetPublicMetricsV2;
-  // quote
-  // reply
+  quoteTweet?: TweetProps;
 };

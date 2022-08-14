@@ -149,7 +149,6 @@ export const Tweet: FC<Tweet> = ({
               spacing="16px"
               alignSelf="center"
               alignContent="center"
-              w="100%"
             >
               {tweet.media?.map((media, index) => (
                 <chakra.img
