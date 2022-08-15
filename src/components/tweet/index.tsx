@@ -87,11 +87,12 @@ export const Tweet: FC<Tweet> = ({
             <HStack align="center" spacing="24px">
               <chakra.img
                 src={tweet.author.avatarUrl}
+                alt="avatar"
                 borderRadius="full"
                 boxSize="120px"
               />
               <Stack spacing="4px">
-                <chakra.h2
+                <chakra.h3
                   fontSize="32px"
                   lineHeight="38px"
                   fontWeight="bold"
@@ -115,9 +116,9 @@ export const Tweet: FC<Tweet> = ({
                       </g>
                     </chakra.svg>
                   ) : null}
-                </chakra.h2>
+                </chakra.h3>
 
-                <chakra.h3
+                <chakra.h4
                   fontSize={"32px"}
                   lineHeight={"38px"}
                   fontWeight="normal"
@@ -125,7 +126,7 @@ export const Tweet: FC<Tweet> = ({
                   noOfLines={1}
                 >
                   @{tweet.author.username}
-                </chakra.h3>
+                </chakra.h4>
               </Stack>
             </HStack>
             <chakra.p
@@ -154,6 +155,7 @@ export const Tweet: FC<Tweet> = ({
                 <chakra.img
                   key={index}
                   src={media?.url}
+                  alt={media?.alt_text || "media-" + index}
                   maxH={
                     tweet.media.length > 2
                       ? mediaHeight / 2 - 12 + "px"

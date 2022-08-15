@@ -6,8 +6,9 @@ const baseURL = `http://localhost:${PORT}`;
 
 const config: PlaywrightTestConfig = {
   use: {
-    baseURL: baseURL,
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL ?? baseURL,
   },
+
   projects: [
     {
       name: "chromium",
