@@ -26,6 +26,9 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
             <Box id={`tweet-${tweet.id}`}>
+              {
+                // TODO: support firefox
+              }
               {typeof window !== "undefined" &&
               window.navigator.userAgent.search("Firefox") > 1 ? (
                 <Heading>
