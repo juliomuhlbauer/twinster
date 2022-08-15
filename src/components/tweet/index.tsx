@@ -87,6 +87,7 @@ export const Tweet: FC<Tweet> = ({
             <HStack align="center" spacing="24px">
               <chakra.img
                 src={tweet.author.avatarUrl}
+                alt="avatar"
                 borderRadius="full"
                 boxSize="120px"
               />
@@ -154,6 +155,7 @@ export const Tweet: FC<Tweet> = ({
                 <chakra.img
                   key={index}
                   src={media?.url}
+                  alt={media?.alt_text}
                   maxH={
                     tweet.media.length > 2
                       ? mediaHeight / 2 - 12 + "px"
