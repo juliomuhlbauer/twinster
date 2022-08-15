@@ -155,7 +155,7 @@ export const Tweet: FC<Tweet> = ({
                 <chakra.img
                   key={index}
                   src={media?.url}
-                  alt={media?.alt_text}
+                  alt={media?.alt_text || "media-" + index}
                   maxH={
                     tweet.media.length > 2
                       ? mediaHeight / 2 - 12 + "px"

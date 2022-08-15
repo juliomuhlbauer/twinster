@@ -78,6 +78,7 @@ const Editor: NextPageWithLayout = () => {
                 {types.map((type) => (
                   <Tab
                     key={type}
+                    id={type}
                     fontWeight="medium"
                     color="gray.400"
                     _selected={{
@@ -114,6 +115,8 @@ const Editor: NextPageWithLayout = () => {
                     />
                   </InputLeftElement>
                   <Input
+                    aria-label="Tweet link"
+                    name="link"
                     borderRadius="full"
                     w={{ md: "xl" }}
                     id="link"

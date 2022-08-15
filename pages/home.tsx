@@ -87,9 +87,9 @@ const Home: NextPageWithLayout = () => {
             >
               <Image
                 src={InstagramDemo}
+                alt="instagram-demo"
                 layout="fill"
                 objectFit="contain"
-                alt="Illustration"
                 priority
               />
             </Box>
