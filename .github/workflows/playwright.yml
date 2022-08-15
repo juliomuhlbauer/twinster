@@ -1,0 +1,23 @@
+name: Playwright tests
+
+on:
+  push:
+    branches: [ "main", "next" ]
+  pull_request:
+    branches: [ "main", "next" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+          node-version: "14.x"
+    - run: yarn install
+    - run: yarn build
+    - run: yarn dev
+    - run: yarn test
