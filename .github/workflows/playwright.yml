@@ -26,12 +26,11 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Waiting netlify deploy preview
-        uses: jakepartusch/wait-for-netlify-action@v1.3
+      - name: Wait Netlify
+        uses: denar90/wait-for-netlify-action@v2.0.2
         id: wait-netlify
         with:
-          site_name: "twinster-app"
-          max_timeout: 360
+          site_id: "ff6b9b65-e128-49a0-9da7-a362be70aea1"
 
       - name: E2E testing
         run: yarn test --project=chromium
