@@ -2,22 +2,37 @@ name: Playwright tests
 
 on:
   push:
-    branches: [ "main", "next" ]
+    branches: ["main", "next"]
   pull_request:
-    branches: [ "main", "next" ]
+    branches: ["main", "next"]
 
 jobs:
-  build:
-
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
+      - name: Get code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
           node-version: "14.x"
-    - run: yarn install
-    - run: yarn build
-    - run: yarn start
-    - run: yarn test --project=chromium
+      - name: Setup Playwright
+        run: npx playwright install-deps chromium
+
+      - name: Install
+        run: yarn install
+
+      - name: Waiting netlify deploy preview
+        uses: jakepartusch/wait-for-netlify-action@v1.3
+        id: wait-netlify
+        with:
+          site_name: "twinster-app"
+          max_timeout: 360
+
+      - name: Test
+        run: yarn test --project=chromium
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: ${{ steps.wait-netlify.outputs.url }}
