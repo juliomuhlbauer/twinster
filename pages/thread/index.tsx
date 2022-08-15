@@ -68,7 +68,14 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
           {thread.map((tweet, index) => (
             <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
               <Box id={`tweet-${tweet.id}`}>
-                <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
+                {typeof window !== "undefined" &&
+                window.navigator.userAgent.search("Firefox") > 1 ? (
+                  <Heading>
+                    Firefox is not supported yet. Please use Chrome or Safari.
+                  </Heading>
+                ) : (
+                  <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
+                )}
               </Box>
             </Box>
           ))}
