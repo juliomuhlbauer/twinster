@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: "14.x"
       - name: Setup Playwright
-        run: npx playwright install-deps chromium
+        run: npx playwright install --with-deps
 
       - name: Install
         run: yarn install
