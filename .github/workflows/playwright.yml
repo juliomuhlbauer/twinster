@@ -26,11 +26,13 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Wait Netlify
-        uses: denar90/wait-for-netlify-action@v2.0.2
+      - name: Wait for Netlify Deploy
+        uses: probablyup/wait-for-netlify-action@3.2.0
         id: wait-netlify
         with:
           site_id: "ff6b9b65-e128-49a0-9da7-a362be70aea1"
+        env:
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
 
       - name: E2E testing
         run: yarn test --project=chromium
