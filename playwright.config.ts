@@ -5,8 +5,15 @@ const PORT = process.env.PORT || 3000;
 const baseURL = `http://localhost:${PORT}`;
 
 const config: PlaywrightTestConfig = {
+  timeout: 30 * 1000,
   use: {
     baseURL: baseURL,
+  },
+  webServer: {
+    command: "yarn dev",
+    url: baseURL,
+    timeout: 120 * 1000,
+    reuseExistingServer: !process.env.CI,
   },
   projects: [
     {
