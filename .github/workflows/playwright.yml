@@ -2,9 +2,9 @@ name: Playwright tests
 
 on:
   push:
-    branches: ["main", "next"]
+    branches: ["next"]
   pull_request:
-    branches: ["main", "next"]
+    branches: ["main"]
 
 jobs:
   test:
@@ -19,10 +19,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "14.x"
+
       - name: Setup Playwright
         run: npx playwright install --with-deps
 
-      - name: Install
+      - name: Install dependencies
         run: yarn install
 
       - name: Waiting netlify deploy preview
@@ -32,7 +33,7 @@ jobs:
           site_name: "twinster-app"
           max_timeout: 360
 
-      - name: Test
+      - name: E2E testing
         run: yarn test --project=chromium
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ steps.wait-netlify.outputs.url }}
