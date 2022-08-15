@@ -91,7 +91,7 @@ export const Tweet: FC<Tweet> = ({
                 boxSize="120px"
               />
               <Stack spacing="4px">
-                <chakra.h2
+                <chakra.h3
                   fontSize="32px"
                   lineHeight="38px"
                   fontWeight="bold"
@@ -115,9 +115,9 @@ export const Tweet: FC<Tweet> = ({
                       </g>
                     </chakra.svg>
                   ) : null}
-                </chakra.h2>
+                </chakra.h3>
 
-                <chakra.h3
+                <chakra.h4
                   fontSize={"32px"}
                   lineHeight={"38px"}
                   fontWeight="normal"
@@ -125,7 +125,7 @@ export const Tweet: FC<Tweet> = ({
                   noOfLines={1}
                 >
                   @{tweet.author.username}
-                </chakra.h3>
+                </chakra.h4>
               </Stack>
             </HStack>
             <chakra.p

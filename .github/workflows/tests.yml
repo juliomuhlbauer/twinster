@@ -8,11 +8,15 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    if: github.event.deployment_status.state == 'success'
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
           node-version: "14.x"
+
       - name: Install dependencies
         run: |
           if [ -e yarn.lock ]; then
@@ -22,10 +26,16 @@ jobs:
           else
           npm i
           fi
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npx playwright test
+
+       env:
+        PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
