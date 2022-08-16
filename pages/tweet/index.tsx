@@ -6,7 +6,7 @@ import { NextPageWithLayout } from "@/types/next";
 import { Theme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
 import { missingIDTweet } from "@/utils/tweets";
-import { Box, Center, Stack } from "@chakra-ui/react";
+import { Box, Center, Heading, Stack } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { useState } from "react";
@@ -26,7 +26,17 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
             <Box id={`tweet-${tweet.id}`}>
-              <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
+              {
+                // TODO: support firefox
+              }
+              {typeof window !== "undefined" &&
+              window.navigator.userAgent.search("Firefox") > 1 ? (
+                <Heading>
+                  Firefox is not supported yet. Please use Chrome or Safari.
+                </Heading>
+              ) : (
+                <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
+              )}
             </Box>
           </Box>
         </Stack>

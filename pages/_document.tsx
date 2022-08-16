@@ -16,8 +16,6 @@ export default function Document() {
         <link rel="apple-touch-icon" sizes="192x192" href="/twinster.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/twinster.png" />
-
-        <meta property="og:image" content="/banner.png" />
       </Head>
       <body>
         <Main />

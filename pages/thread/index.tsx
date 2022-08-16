@@ -35,10 +35,7 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
       <NextSeo title="Thread" />
 
       <Center>
-        <Stack spacing={4} align="center" mb={48}>
-          <Heading size="md"></Heading>
-
-          {/* <NoSSR>
+        {/* <NoSSR>
             <Alert status="warning">
               <Stack align="center">
                 <AlertIcon mr={0} boxSize={6} />
@@ -64,14 +61,26 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
               </Stack>
             </Alert>
           </NoSSR> */}
-
-          {thread.map((tweet, index) => (
-            <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
-              <Box id={`tweet-${tweet.id}`}>
-                <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
-              </Box>
-            </Box>
-          ))}
+        <Stack spacing={4} align="center" mb={48}>
+          {
+            // TODO: support firefox
+          }
+          {typeof window !== "undefined" &&
+          window.navigator.userAgent.search("Firefox") > 1 ? (
+            <Heading>
+              Firefox is not supported yet. Please use Chrome or Safari.
+            </Heading>
+          ) : (
+            <>
+              {thread.map((tweet, index) => (
+                <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
+                  <Box id={`tweet-${tweet.id}`}>
+                    <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
+                  </Box>
+                </Box>
+              ))}
+            </>
+          )}
         </Stack>
       </Center>
       <TweetSettings
