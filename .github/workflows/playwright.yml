@@ -26,18 +26,19 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Wait for Netlify Deploy
-        uses: probablyup/wait-for-netlify-action@3.2.0
-        id: wait-netlify
+      - name: Wait for Vercel Deploy
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        id: wait-vercel
         with:
-          site_id: "ff6b9b65-e128-49a0-9da7-a362be70aea1"
-        env:
-          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
+          
+      - run: echo ${{steps.waitFor200.outputs.url}}
 
       - name: E2E testing
         run: yarn test --project=chromium
         env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ steps.wait-netlify.outputs.url }}
+          PLAYWRIGHT_TEST_BASE_URL: ${{ steps.wait-vercel.outputs.url }}
       
       - uses: actions/upload-artifact@v2
         if: always()
