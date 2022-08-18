@@ -64,6 +64,7 @@ const Editor: NextPageWithLayout = () => {
         <Stack align="center" spacing={8}>
           <Stack align="center" spacing={4}>
             <Tabs
+              index={types.indexOf(type)}
               onChange={(index) => setType(types[index])}
               colorScheme="primary"
               variant="soft-rounded"
