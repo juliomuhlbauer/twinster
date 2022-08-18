@@ -26,7 +26,7 @@ type AppPropsWithLayout = AppProps & {
 export const meta = {
   title: "Twinster",
   url: "https://twinster.app",
-  description: "Share your tweets anywhere.",
+  description: "Share your tweets and threads anywhere.",
   banner: "https://twinster.app/banner.png",
 };
 
@@ -34,7 +34,7 @@ const SEO = () => {
   const router = useRouter();
   return (
     <DefaultSeo
-      defaultTitle={"Twinster | Share your tweets anywhere"}
+      defaultTitle={"Twinster | Share your tweets and threads anywhere."}
       titleTemplate={`%s | Twinster`}
       description={meta.description}
       openGraph={{
