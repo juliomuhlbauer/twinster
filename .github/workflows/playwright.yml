@@ -26,12 +26,14 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Wait for Vercel preview deployment to be ready
-        uses: patrickedqvist/wait-for-vercel-preview@1.2.0
+      - name: Wait for Vercel Deploy
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: wait-vercel
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 600
+          max_timeout: 60
+          
+      - run: echo ${{steps.waitFor200.outputs.url}}
 
       - name: E2E testing
         run: yarn test --project=chromium
