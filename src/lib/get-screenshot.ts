@@ -29,6 +29,10 @@ export async function getScreenshot(
 ) {
   const options = await getOptions();
 
+  await chromium.font(
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+  );
+
   const browser = await playwright.chromium.launch(options);
 
   const page = await browser.newPage();
