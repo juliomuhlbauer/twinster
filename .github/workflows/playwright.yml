@@ -31,9 +31,7 @@ jobs:
         id: wait-vercel
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 60
-          
-      - run: echo ${{steps.waitFor200.outputs.url}}
+          max_timeout: 120
 
       - name: E2E testing
         run: yarn test --project=chromium
