@@ -28,7 +28,7 @@ jobs:
 
       - name: Wait for Vercel preview deployment to be ready
         uses: patrickedqvist/wait-for-vercel-preview@1.2.0
-        id: waitForVercelPreviewDeployment
+        id: wait-vercel
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 600
@@ -36,7 +36,7 @@ jobs:
       - name: E2E testing
         run: yarn test --project=chromium
         env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }}
+          PLAYWRIGHT_TEST_BASE_URL: ${{ steps.wait-vercel.outputs.url }}
       
       - uses: actions/upload-artifact@v2
         if: always()
