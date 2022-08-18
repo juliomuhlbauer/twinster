@@ -1,5 +1,5 @@
-import chromium from "chrome-aws-lambda";
-import playwright from "playwright-core";
+import puppeteer, { Page } from "puppeteer-core";
+import chrome from "chrome-aws-lambda";
 
 export async function getOptions() {
   const isDev = !process.env.AWS_REGION;
@@ -14,35 +14,39 @@ export async function getOptions() {
     };
   } else {
     options = {
-      args: chromium.args,
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
     };
   }
 
   return options;
 }
 
+let _page: Page | null;
+async function getPage(): Promise<Page> {
+  if (_page) {
+    return _page;
+  }
+
+  const options = await getOptions();
+  const browser = await puppeteer.launch(options);
+
+  _page = await browser.newPage();
+
+  return _page;
+}
+
 export async function getScreenshot(
   html: string,
   { width, height }: { width: number; height: number }
 ) {
-  const options = await getOptions();
+  const page = await getPage();
 
-  // await chromium.font(
-  //   "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-  // );
-
-  const browser = await playwright.chromium.launch(options);
-
-  const page = await browser.newPage();
-
-  await page.setViewportSize({ width, height });
+  await page.setViewport({ width, height });
   await page.setContent(html);
 
   const file = await page.screenshot({ type: "png" });
-
-  await browser.close();
 
   return file;
 }
