@@ -33,7 +33,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
           deployment-url: twinster.vercel.app
-          timeout: 10
+          timeout: 600
 
       - name: E2E testing
         run: yarn test --project=chromium
