@@ -1,9 +1,13 @@
-const playwright = require("playwright-aws-lambda");
+import playwright, { loadFont } from "playwright-aws-lambda";
 
 export async function getScreenshot(
   html: string,
   { width, height }: { width: number; height: number }
 ) {
+  await loadFont(
+    "https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf"
+  );
+
   const browser = await playwright.launchChromium();
   const context = await browser.newContext();
 
