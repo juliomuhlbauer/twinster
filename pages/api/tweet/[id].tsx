@@ -10,7 +10,7 @@ import * as ReactDOMServer from "react-dom/server";
 
 let tweet = welcomeTweet;
 
-const twitterAPI = async (req: NextApiRequest, res: NextApiResponse) => {
+const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
   const tweetTheme: Theme = (req.query.theme as Theme) || "darkBlue";
 
   const tweetID = req.query.id as string;
@@ -36,4 +36,4 @@ const twitterAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   res.end(file);
 };
 
-export default twitterAPI;
+export default tweetImage;
