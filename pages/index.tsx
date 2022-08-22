@@ -1,5 +1,6 @@
 import { Tweet } from "@/components/tweet";
 import { Layout } from "@/layout";
+import { events } from "@/lib/analytics";
 import { NextPageWithLayout } from "@/types/next";
 import { findTweetId } from "@/utils/find-tweet-id";
 import { welcomeTweet } from "@/utils/tweets";
@@ -37,22 +38,18 @@ const Editor: NextPageWithLayout = () => {
 
   const fetchTweet = () => {
     if (link) {
+      const id = findTweetId(link);
+
       if (type === "tweet") {
-        event("fetch_tweet", {
-          label: findTweetId(link),
-          category: "tweet",
-        });
+        events.fetchTweet(id);
       } else if (type === "thread") {
-        event("fetch_thread", {
-          label: findTweetId(link),
-          category: "thread",
-        });
+        events.fetchThread(id);
       }
 
       router.push({
         pathname: "/" + type,
         query: {
-          id: findTweetId(link),
+          id: id,
         },
       });
     }

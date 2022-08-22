@@ -8,10 +8,10 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import { DefaultSeo } from "next-seo";
-import type { AppProps, NextWebVitalsMetric } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import Router, { useRouter } from "next/router";
-import { event, GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import NProgress from "nprogress";
 
@@ -64,8 +64,6 @@ const SEO = () => {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  usePagesViews();
-
   return (
     <>
       <Head>
@@ -79,7 +77,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       <SEO />
 
       {process.env.NODE_ENV !== "development" && (
-        <GoogleAnalytics strategy="afterInteractive" />
+        <GoogleAnalytics strategy="afterInteractive" trackPageViews />
       )}
 
       <ChakraProvider theme={theme}>
