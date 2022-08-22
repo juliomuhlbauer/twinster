@@ -89,18 +89,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   );
 }
 
-export function reportWebVitals({
-  id,
-  name,
-  label,
-  value,
-}: NextWebVitalsMetric) {
-  event(name, {
-    category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
-    value: Math.round(name === "CLS" ? value * 1000 : value),
-    label: id,
-    nonInteraction: true,
-  });
-}
+export { reportWebVitals } from "next-axiom";
 
 export default App;
