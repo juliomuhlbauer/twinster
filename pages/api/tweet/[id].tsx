@@ -1,5 +1,5 @@
 import { Tweet } from "@/components/tweet";
-import { getScreenshot } from "@/lib/get-secreenshot";
+import { getScreenshot } from "@/lib/get-screenshot-puppeteer";
 import { getTweet } from "@/lib/twitter";
 import { theme } from "@/theme";
 import { Theme } from "@/types/twitter";
@@ -18,9 +18,20 @@ const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
   tweet = await getTweet(tweetID);
 
   const tweetHTML = ReactDOMServer.renderToString(
-    <ChakraProvider theme={theme}>
-      <Tweet tweet={tweet} theme={tweetTheme} aspect="4:5" isStatic />
-    </ChakraProvider>
+    <>
+      {/* <head>
+        <title>Teste</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head> */}
+      <ChakraProvider theme={theme}>
+        <Tweet tweet={tweet} theme={tweetTheme} aspect="4:5" isStatic />
+      </ChakraProvider>
+    </>
   );
 
   const isHTMLDebugMode = false;
