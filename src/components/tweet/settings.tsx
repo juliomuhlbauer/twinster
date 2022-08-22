@@ -1,10 +1,10 @@
+import { events } from "@/lib/analytics";
 import { themeColors } from "@/theme";
 import { Theme, TweetProps } from "@/types/twitter";
 import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
 import { toBlob } from "html-to-image";
 import JSZip from "jszip";
-import { event } from "nextjs-google-analytics";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
@@ -57,10 +57,7 @@ export const TweetSettings = ({
           console.error(err);
         });
 
-      event("download_tweet", {
-        label: tweet.id,
-        category: "tweet",
-      });
+      events.downloadTweet(tweet.id);
 
       setDownloading(false);
     }
@@ -98,10 +95,9 @@ export const TweetSettings = ({
         saveAs(blob, `twinster_${thread[0].text.slice(0, 20)}.zip`);
       });
 
-      event("download_thread", {
-        label: thread[0].id,
-        category: "thread",
-      });
+      const id = thread[0].id;
+
+      events.downloadThread(id);
 
       setDownloading(false);
       onThreadDownload && onThreadDownload();
