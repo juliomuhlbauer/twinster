@@ -1,32 +1,12 @@
 import { event } from "nextjs-google-analytics";
 
-const fetchTweet = (id: string) =>
-  event("fetch_tweet", {
-    label: id,
-    category: "tweet",
-  });
+type Events = "fetch" | "download";
 
-const fetchThread = (id: string) =>
-  event("fetch_thread", {
-    label: id,
-    category: "thread",
-  });
+type Categories = "tweet" | "thread";
 
-const downloadTweet = (id: string) =>
-  event("download_tweet", {
+export const report = (category: Categories, name: Events, id: string) => {
+  event(`${name}_${category}`, {
     label: id,
-    category: "tweet",
+    category: category,
   });
-
-const downloadThread = (id: string) =>
-  event("download_thread", {
-    label: id,
-    category: "thread",
-  });
-
-export const events = {
-  fetchTweet,
-  fetchThread,
-  downloadTweet,
-  downloadThread,
 };
