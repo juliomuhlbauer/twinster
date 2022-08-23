@@ -31,7 +31,7 @@
     "nprogress": "^0.2.0",
     "playwright-aws-lambda": "^0.9.0",
     "playwright-core": "^1.25.0",
-    "puppeteer-core": "^16",
+    "puppeteer-core": "^7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
