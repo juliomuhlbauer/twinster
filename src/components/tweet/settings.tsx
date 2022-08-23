@@ -1,4 +1,4 @@
-import { events } from "@/lib/analytics";
+import { report } from "@/lib/analytics";
 import { themeColors } from "@/theme";
 import { Theme, TweetProps } from "@/types/twitter";
 import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
@@ -57,7 +57,7 @@ export const TweetSettings = ({
           console.error(err);
         });
 
-      events.downloadTweet(tweet.id);
+      report("download", "tweet", tweet.id);
 
       setDownloading(false);
     }
@@ -97,7 +97,7 @@ export const TweetSettings = ({
 
       const id = thread[0].id;
 
-      events.downloadThread(id);
+      report("download", "thread", id);
 
       setDownloading(false);
       onThreadDownload && onThreadDownload();
