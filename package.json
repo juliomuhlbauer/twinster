@@ -23,7 +23,6 @@
     "immer": "^9.0.15",
     "jszip": "^3.10.1",
     "next": "^12",
-    "next-axiom": "^0.13.0",
     "next-pwa": "5.5.4",
     "next-seo": "^5.5.0",
     "next-sitemap": "^3.1.16",
