@@ -1,5 +1,5 @@
 import { Tweet } from "@/components/tweet";
-import { getScreenshot } from "@/lib/get-screenshot-puppeteer";
+import { getScreenshot } from "@/lib/get-screenshot";
 import { getTweet } from "@/lib/twitter";
 import { theme } from "@/theme";
 import { Theme } from "@/types/twitter";

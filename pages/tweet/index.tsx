@@ -26,7 +26,7 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
             <Box id={`tweet-${tweet.id}`}>
-              {/* {
+              {
                 // TODO: support firefox
               }
               {typeof window !== "undefined" &&
@@ -36,9 +36,9 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
                 </Heading>
               ) : (
                 <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
-              )} */}
+              )}
 
-              <Img maxW="container.sm" src={"/api/tweet/" + tweet.id} />
+              {/* <Img maxW="container.sm" src={"/api/tweet/" + tweet.id} /> */}
             </Box>
           </Box>
         </Stack>
