@@ -68,6 +68,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   );
 
   return {
+    notFound: process.env.NODE_ENV === "production",
     props: {
       galleryTweets: galleryTweets,
     },
