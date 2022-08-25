@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-page-custom-font */
+/* eslint-disable @next/next/no-head-element */
 import { Tweet } from "@/components/tweet";
 import { getScreenshot } from "@/lib/get-screenshot";
 import { getTweet } from "@/lib/twitter";
 import { theme } from "@/theme";
-import { Theme } from "@/types/twitter";
+import { TweetTheme } from "@/types/twitter";
 import { welcomeTweet } from "@/utils/tweets";
 import { ChakraProvider } from "@chakra-ui/react";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -11,7 +13,7 @@ import * as ReactDOMServer from "react-dom/server";
 let tweet = welcomeTweet;
 
 const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
-  const tweetTheme: Theme = (req.query.theme as Theme) || "darkBlue";
+  const tweetTheme: TweetTheme = (req.query.theme as TweetTheme) || "darkBlue";
 
   const tweetID = req.query.id as string;
 
@@ -19,22 +21,32 @@ const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const tweetHTML = ReactDOMServer.renderToString(
     <>
-      {/* <head>
+      <head>
         <title>Teste</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-      </head> */}
+      </head>
       <ChakraProvider theme={theme}>
-        <Tweet tweet={tweet} theme={tweetTheme} aspect="4:5" isStatic />
+        <Tweet
+          tweet={tweet}
+          theme={tweetTheme}
+          aspect="4:5"
+          isStatic
+          watermark
+        />
       </ChakraProvider>
     </>
   );
 
-  const isHTMLDebugMode = false;
+  const isHTMLDebugMode = true;
 
   if (isHTMLDebugMode) {
     res.setHeader("Content-Type", "text/html");

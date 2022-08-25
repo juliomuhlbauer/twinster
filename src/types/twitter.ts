@@ -1,8 +1,8 @@
 import { MediaObjectV2, TweetPublicMetricsV2 } from "twitter-api-v2";
 
-export type Theme = "light" | "darkBlue" | "dark";
+export type TweetTheme = "light" | "darkBlue" | "dark";
 
-export type Format = "twitter" | "instagram" | "1x1";
+export type TweetFormat = "twitter" | "instagram" | "1x1";
 
 export type TweetProps = {
   id: string;
