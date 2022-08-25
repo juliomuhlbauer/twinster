@@ -1,5 +1,5 @@
 import { themeColors } from "@/theme";
-import { Theme, TweetProps } from "@/types/twitter";
+import { TweetTheme, TweetProps } from "@/types/twitter";
 import {
   Box,
   Center,
@@ -14,7 +14,7 @@ import { Watermark } from "./watermark";
 
 interface Tweet {
   tweet: TweetProps;
-  theme: Theme;
+  theme: TweetTheme;
   aspect: "1:1" | "4:5" | "4:3";
   isStatic?: boolean;
   watermark?: boolean;
@@ -172,7 +172,7 @@ export const Tweet: FC<Tweet> = ({
         </Stack>
       </Center>
 
-      {watermark && <Watermark />}
+      {watermark && <Watermark theme={theme} />}
     </Box>
   );
 };
