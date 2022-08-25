@@ -1,6 +1,6 @@
 import { report } from "@/lib/analytics";
 import { themeColors } from "@/theme";
-import { Theme, TweetProps } from "@/types/twitter";
+import { TweetTheme, TweetProps } from "@/types/twitter";
 import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
 import { toBlob } from "html-to-image";
@@ -26,8 +26,8 @@ export const TweetSettings = ({
 }: {
   tweet?: TweetProps;
   thread?: TweetProps[];
-  theme: Theme;
-  setTheme: Dispatch<SetStateAction<Theme>>;
+  theme: TweetTheme;
+  setTheme: Dispatch<SetStateAction<TweetTheme>>;
   canDownload?: boolean;
   onThreadDownload?: () => void;
 }) => {

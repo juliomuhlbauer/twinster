@@ -4,7 +4,7 @@ import { TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
 import { getThread } from "@/lib/twitter";
 import { NextPageWithLayout } from "@/types/next";
-import { Theme, TweetProps } from "@/types/twitter";
+import { TweetTheme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
 import { missingIDTweet, thread7Days } from "@/utils/tweets";
 import {
@@ -28,7 +28,7 @@ interface Editor {
 }
 
 const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
-  const [theme, setTheme] = useState<Theme>("darkBlue");
+  const [theme, setTheme] = useState<TweetTheme>("darkBlue");
 
   return (
     <>

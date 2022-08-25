@@ -46,7 +46,7 @@ const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
     </>
   );
 
-  const isHTMLDebugMode = true;
+  const isHTMLDebugMode = false;
 
   if (isHTMLDebugMode) {
     res.setHeader("Content-Type", "text/html");

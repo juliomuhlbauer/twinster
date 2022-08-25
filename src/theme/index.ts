@@ -1,4 +1,4 @@
-import { Theme } from "@/types/twitter";
+import { TweetTheme } from "@/types/twitter";
 import { extendTheme, ThemeTypings } from "@chakra-ui/react";
 import { theme as base, ThemeConfig } from "@chakra-ui/theme";
 import components from "./components";
@@ -18,13 +18,13 @@ const twitterColors = {
   blue: "#4D9EEA",
 };
 
-type TweetTheme = {
+type TweetThemeParts = {
   bg: ThemeTypings["colors"];
   accent: ThemeTypings["colors"];
   secondary: ThemeTypings["colors"];
 };
 
-export const themeColors: Record<Theme, TweetTheme> = {
+export const themeColors: Record<TweetTheme, TweetThemeParts> = {
   light: {
     bg: "white",
     accent: "#101419",
