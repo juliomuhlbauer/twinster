@@ -22,6 +22,7 @@ type TweetThemeParts = {
   bg: ThemeTypings["colors"];
   accent: ThemeTypings["colors"];
   secondary: ThemeTypings["colors"];
+  blue: ThemeTypings["colors"];
 };
 
 export const themeColors: Record<TweetTheme, TweetThemeParts> = {
@@ -29,16 +30,19 @@ export const themeColors: Record<TweetTheme, TweetThemeParts> = {
     bg: "white",
     accent: "#101419",
     secondary: "#576370",
+    blue: "#00A3C4",
   },
   darkBlue: {
     bg: "#1c2732",
     accent: "#D9D9D9",
     secondary: "#70757C",
+    blue: "#76E4F7",
   },
   dark: {
     bg: "#070807",
     accent: "#D9D9D9",
     secondary: "#70757C",
+    blue: "#76E4F7",
   },
 };
 

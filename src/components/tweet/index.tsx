@@ -64,17 +64,19 @@ export const Tweet: FC<Tweet> = ({
   }, [textDimensions, height]);
 
   return (
-    <Box position="relative">
+    <Box
+      position="relative"
+      sx={{
+        zoom: isStatic
+          ? 1
+          : {
+              base: 0.3,
+              sm: 0.4,
+              md: 0.5,
+            },
+      }}
+    >
       <Center
-        sx={{
-          zoom: isStatic
-            ? 1
-            : {
-                base: 0.3,
-                sm: 0.4,
-                md: 0.5,
-              },
-        }}
         bgColor={bg}
         p="90px"
         w={width * 1080 + "px"}

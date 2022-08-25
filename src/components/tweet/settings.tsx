@@ -37,25 +37,17 @@ export const TweetSettings = ({
     setDownloading(true);
 
     if (tweet) {
-      const ref = document.getElementById(`tweet-${tweet.id}`);
+      const tweetImgRef = document.getElementById(`tweet-${tweet.id}`);
 
-      if (ref === null) {
+      if (tweetImgRef === null) {
         console.error("Could not find tweet element");
         return;
       }
 
-      await toBlob(ref, {
-        canvasHeight: 1350,
-        canvasWidth: 1080,
-      })
-        .then((blob) => {
-          if (blob != null) {
-            saveAs(blob, `twinster_${tweet.text.slice(0, 20)}.png`);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      saveAs(
+        "/api/tweet/" + tweet.id,
+        `twinster_${tweet.text.slice(0, 20)}.png`
+      );
 
       report("download", "tweet", tweet.id);
 
@@ -64,14 +56,14 @@ export const TweetSettings = ({
 
     if (thread) {
       const blobs = thread.map(async (tweet, index) => {
-        const ref = document.getElementById(`tweet-${tweet.id}`);
+        const tweetImgRef = document.getElementById(`tweet-${tweet.id}`);
 
-        if (ref === null) {
+        if (tweetImgRef === null) {
           console.error("Could not find tweet element");
           return;
         }
 
-        const blob = await toBlob(ref, {
+        const blob = await toBlob(tweetImgRef, {
           canvasHeight: 1350,
           canvasWidth: 1080,
         })

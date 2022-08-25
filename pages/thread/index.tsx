@@ -16,6 +16,7 @@ import {
   Button,
   Center,
   Heading,
+  Img,
   Link,
   Stack,
 } from "@chakra-ui/react";
@@ -62,25 +63,15 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
             </Alert>
           </NoSSR> */}
         <Stack spacing={4} align="center" mb={48}>
-          {
-            // TODO: support firefox
-          }
-          {typeof window !== "undefined" &&
-          window.navigator.userAgent.search("Firefox") > 1 ? (
-            <Heading>
-              Firefox is not supported yet. Please use Chrome or Safari.
-            </Heading>
-          ) : (
-            <>
-              {thread.map((tweet, index) => (
-                <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
-                  <Box id={`tweet-${tweet.id}`}>
-                    <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
-                  </Box>
-                </Box>
-              ))}
-            </>
-          )}
+          {thread.map((tweet, index) => (
+            <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
+              <Img
+                id={`tweet-${tweet.id}`}
+                maxW="container.sm"
+                src={"/api/tweet/" + tweet.id}
+              />
+            </Box>
+          ))}
         </Stack>
       </Center>
       <TweetSettings
