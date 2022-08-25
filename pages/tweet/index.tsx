@@ -16,7 +16,7 @@ interface Editor {
   tweet: TweetProps;
 }
 
-const TweetEditor: NextPageWithLayout<Editor> = () => {
+const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
   const [theme, setTheme] = useState<TweetTheme>("darkBlue");
 
   const router = useRouter();
@@ -30,13 +30,15 @@ const TweetEditor: NextPageWithLayout<Editor> = () => {
       <Center py={4}>
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
-            <Box id={`tweet-${id}`}>
-              <Img maxW="container.sm" src={"/api/tweet/" + id} />
-            </Box>
+            <Img
+              id={`tweet-${id}`}
+              maxW="container.sm"
+              src={"/api/tweet/" + id}
+            />
           </Box>
         </Stack>
       </Center>
-      {/* <TweetSettings theme={theme} setTheme={setTheme} tweet={tweet} /> */}
+      <TweetSettings theme={theme} setTheme={setTheme} tweet={tweet} />
     </>
   );
 };
@@ -47,24 +49,24 @@ TweetEditor.getLayout = function getLayout(page) {
 
 export default TweetEditor;
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const link = context.query.id as string;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const link = context.query.id as string;
 
-//   const id = findTweetId(link);
+  const id = findTweetId(link);
 
-//   let tweet = missingIDTweet;
+  let tweet = missingIDTweet;
 
-//   if (id) {
-//     try {
-//       tweet = await getTweet(id);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   }
+  if (id) {
+    try {
+      tweet = await getTweet(id);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-//   return {
-//     props: {
-//       tweet,
-//     },
-//   };
-// };
+  return {
+    props: {
+      tweet,
+    },
+  };
+};
