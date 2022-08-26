@@ -33,7 +33,7 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
             <Img
               id={`tweet-${id}`}
               maxW="container.sm"
-              src={"/api/tweet/" + id}
+              src={`/api/tweet/${id}?theme=${theme}`}
             />
           </Box>
         </Stack>
