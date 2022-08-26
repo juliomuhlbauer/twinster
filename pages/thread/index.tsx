@@ -67,7 +67,8 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
             <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
               <Img
                 id={`tweet-${tweet.id}`}
-                maxW="container.sm"
+                w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
+                h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
                 src={`/api/tweet/${tweet.id}?theme=${theme}`}
               />
             </Box>

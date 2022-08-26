@@ -6,7 +6,14 @@ import { NextPageWithLayout } from "@/types/next";
 import { TweetTheme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
 import { missingIDTweet } from "@/utils/tweets";
-import { Box, Center, Heading, Img, Stack } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Box,
+  Center,
+  Heading,
+  Img,
+  Stack,
+} from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -32,7 +39,9 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
           <Box p={2} borderWidth="1px" borderRadius="lg">
             <Img
               id={`tweet-${id}`}
-              maxW="container.sm"
+              w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
+              h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
+              objectFit="contain"
               src={`/api/tweet/${id}?theme=${theme}`}
             />
           </Box>
