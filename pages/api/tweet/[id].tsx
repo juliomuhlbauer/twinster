@@ -6,11 +6,20 @@ import { getTweet } from "@/lib/twitter";
 import { theme } from "@/theme";
 import { TweetTheme } from "@/types/twitter";
 import { welcomeTweet } from "@/utils/tweets";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, theme as base } from "@chakra-ui/react";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as ReactDOMServer from "react-dom/server";
 
 let tweet = welcomeTweet;
+
+const fonts = {
+  heading: `Inter, 'Noto Emoji', ${base.fonts.heading}`,
+  body: `Inter, 'Noto Emoji', ${base.fonts.body}`,
+};
+
+const apiTheme = extendTheme(theme, {
+  fonts,
+});
 
 const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
   const tweetTheme: TweetTheme = (req.query.theme as TweetTheme) || "darkBlue";
@@ -38,7 +47,7 @@ const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
           rel="stylesheet"
         />
       </head>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider theme={apiTheme}>
         <Tweet
           tweet={tweet}
           theme={tweetTheme}
