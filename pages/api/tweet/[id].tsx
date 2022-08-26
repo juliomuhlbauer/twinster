@@ -13,8 +13,8 @@ import * as ReactDOMServer from "react-dom/server";
 let tweet = welcomeTweet;
 
 const fonts = {
-  heading: `Inter, 'Noto Color Emoji Compat', ${base.fonts.heading}`,
-  body: `Inter, 'Noto Color Emoji Compat', ${base.fonts.body}`,
+  heading: `Inter, 'Noto Colr Emoji Glyf', ${base.fonts.heading}`,
+  body: `Inter, 'Noto Colr Emoji Glyf', ${base.fonts.body}`,
 };
 
 const apiTheme = extendTheme(theme, {
@@ -43,7 +43,7 @@ const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
           rel="stylesheet"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji+Compat&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Colr+Emoji+Glyf&display=swap"
           rel="stylesheet"
         />
       </head>
