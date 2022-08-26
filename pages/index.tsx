@@ -68,10 +68,10 @@ const Editor: NextPageWithLayout = () => {
                 borderWidth={2}
                 borderColor="#76E4F7"
               >
-                {types.map((type) => (
+                {types.map((t) => (
                   <Tab
-                    key={type}
-                    id={type}
+                    key={t}
+                    id={t}
                     fontWeight="medium"
                     color="gray.400"
                     _selected={{
@@ -79,12 +79,17 @@ const Editor: NextPageWithLayout = () => {
                       color: "primary.900",
                     }}
                   >
-                    {type === "tweet" ? (
+                    {t === "tweet" ? (
                       "Tweet"
                     ) : (
                       <>
                         Thread
-                        <Tag mx={2}>beta</Tag>
+                        <Tag
+                          mx={2}
+                          variant={type === "tweet" ? "subtle" : "solid"}
+                        >
+                          beta
+                        </Tag>
                       </>
                     )}
                   </Tab>

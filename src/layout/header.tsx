@@ -1,4 +1,3 @@
-import { Beta } from "@/components/beta";
 import { Container, HStack, Icon, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FC } from "react";
@@ -28,7 +27,6 @@ export const Header: FC<Header> = ({ isAppHome = false }) => {
             <Logo />
           </HStack>
         </HStack>
-        <Beta />
       </HStack>
     </Container>
   );
