@@ -68,7 +68,7 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
               <Img
                 id={`tweet-${tweet.id}`}
                 maxW="container.sm"
-                src={"/api/tweet/" + tweet.id}
+                src={`/api/tweet/${tweet.id}?theme=${theme}`}
               />
             </Box>
           ))}
