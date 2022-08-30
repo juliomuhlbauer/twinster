@@ -3,7 +3,7 @@ import { Layout } from "@/layout";
 import { report } from "@/lib/analytics";
 import { NextPageWithLayout } from "@/types/next";
 import { findTweetId } from "@/utils/find-tweet-id";
-import { welcomeTweet } from "@/utils/tweets";
+import { welcomeTweet } from "@/assets/tweets";
 import {
   Box,
   chakra,

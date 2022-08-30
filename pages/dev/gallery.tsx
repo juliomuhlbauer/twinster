@@ -1,5 +1,5 @@
 import { Tweet } from "@/components/tweet";
-import { getTweet, getTweets } from "@/lib/twitter";
+import { getTweets } from "@/lib/twitter/get-tweets";
 import { TweetProps, TweetTheme } from "@/types/twitter";
 import { Container, Heading, Stack } from "@chakra-ui/react";
 import { GetStaticProps, NextPage } from "next";

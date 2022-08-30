@@ -1,4 +1,4 @@
-import { getTweet } from "@/lib/twitter";
+import { getTweet } from "@/lib/twitter/get-tweet";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const twitterAPI = async (req: NextApiRequest, res: NextApiResponse) => {

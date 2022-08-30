@@ -1,10 +1,10 @@
+import { missingIDTweet, thread7Days } from "@/assets/tweets";
 import { TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
-import { getThread } from "@/lib/twitter";
+import { getThread } from "@/lib/twitter/get-thread";
 import { NextPageWithLayout } from "@/types/next";
 import { TweetProps, TweetTheme } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
-import { missingIDTweet, thread7Days } from "@/utils/tweets";
 import { Box, Center, Img, Stack } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";

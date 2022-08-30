@@ -1,11 +1,10 @@
 import { Tweet } from "@/components/tweet";
 import { TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
-import { getTweet } from "@/lib/twitter";
 import { NextPageWithLayout } from "@/types/next";
 import { TweetTheme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
-import { missingIDTweet } from "@/utils/tweets";
+import { missingIDTweet } from "@/assets/tweets";
 import {
   AspectRatio,
   Box,
@@ -18,6 +17,7 @@ import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { getTweet } from "@/lib/twitter/get-tweet";
 
 interface Editor {
   tweet: TweetProps;
