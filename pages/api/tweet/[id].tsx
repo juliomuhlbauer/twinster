@@ -1,14 +1,15 @@
+/* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/no-page-custom-font */
 /* eslint-disable @next/next/no-head-element */
 import { Tweet } from "@/components/tweet";
 import { getScreenshot } from "@/lib/get-screenshot";
-import { getTweet } from "@/lib/twitter";
 import { theme } from "@/theme";
 import { TweetTheme } from "@/types/twitter";
-import { welcomeTweet } from "@/utils/tweets";
+import { welcomeTweet } from "@/assets/tweets";
 import { ChakraProvider, extendTheme, theme as base } from "@chakra-ui/react";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as ReactDOMServer from "react-dom/server";
+import { getTweet } from "@/lib/twitter/get-tweet";
 
 let tweet = welcomeTweet;
 

@@ -1,5 +1,5 @@
 import { Tweet } from "@/components/tweet";
-import { errorTweet } from "@/utils/tweets";
+import { errorTweet } from "@/assets/tweets";
 import { AspectRatio, Button, Center, Stack } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
