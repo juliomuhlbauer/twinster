@@ -24,6 +24,7 @@ const apiTheme = extendTheme(theme, {
 
 const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
   const tweetTheme: TweetTheme = (req.query.theme as TweetTheme) || "darkBlue";
+  const encoding = (req.query.enconding as "binary" | "base64") || "binary";
 
   const tweetID = req.query.id as string;
 
@@ -71,10 +72,20 @@ const tweetImage = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.end(tweetHTML);
   }
 
-  const file = await getScreenshot(tweetHTML, { width: 1080, height: 1350 });
+  const file = await getScreenshot(tweetHTML, {
+    width: 1080,
+    height: 1350,
+    encoding,
+  });
 
-  res.setHeader("Content-Type", "image/png");
-  res.end(file);
+  if (encoding === "binary") {
+    res.setHeader("Content-Type", "image/png");
+    res.end(file);
+  } else if (encoding === "base64") {
+    res.status(200).json({
+      base64: file,
+    });
+  }
 };
 
 export default tweetImage;
