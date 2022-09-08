@@ -1,9 +1,8 @@
 import { report } from "@/lib/analytics";
 import { themeColors } from "@/theme";
-import { TweetTheme, TweetProps } from "@/types/twitter";
+import { TweetProps, TweetTheme } from "@/types/twitter";
 import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
-import { toBlob } from "html-to-image";
 import JSZip from "jszip";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
@@ -14,7 +13,18 @@ const themeIcons = {
   dark: FiMoon,
 };
 
-const zip = JSZip();
+const toDataURL = (url: string): Promise<string> =>
+  fetch(url)
+    .then((response) => response.blob())
+    .then(
+      (blob) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        })
+    );
 
 export const TweetSettings = ({
   tweet,
@@ -55,30 +65,17 @@ export const TweetSettings = ({
     }
 
     if (thread) {
+      const zip = JSZip();
+
       const blobs = thread.map(async (tweet, index) => {
-        const tweetImgRef = document.getElementById(`tweet-${tweet.id}`);
+        const base64data = await toDataURL("/api/tweet/" + tweet.id).then(
+          (dataUrl) =>
+            zip.file(`twinster_${index + 1}.png`, dataUrl.split(",")[1], {
+              base64: true,
+            })
+        );
 
-        if (tweetImgRef === null) {
-          console.error("Could not find tweet element");
-          return;
-        }
-
-        const blob = await toBlob(tweetImgRef, {
-          canvasHeight: 1350,
-          canvasWidth: 1080,
-        })
-          .then((blob) => {
-            if (blob != null) {
-              zip.file(`twinster_${index + 1}.png`, blob, {
-                binary: true,
-              });
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-
-        return blob;
+        return base64data;
       });
 
       await Promise.all(blobs);

@@ -1,7 +1,16 @@
 import { Tweet } from "@/components/tweet";
 import { getTweets } from "@/lib/twitter/get-tweets";
 import { TweetProps, TweetTheme } from "@/types/twitter";
-import { Container, Heading, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Img,
+  Stack,
+} from "@chakra-ui/react";
 import { GetStaticProps, NextPage } from "next";
 
 interface GaleryProps {
@@ -14,29 +23,50 @@ interface GaleryProps {
 
 const Gallery: NextPage<GaleryProps> = ({ galleryTweets }) => {
   return (
-    <Container py={8}>
-      <Stack spacing={8} align="center">
-        <Heading>Gallery</Heading>
-        {galleryTweets.map((galeryTweet) => {
-          const tweet = galeryTweet.tweet;
+    <>
+      <Container py={8}>
+        <Stack spacing={8} align="center">
+          <Heading>Gallery</Heading>
+          {galleryTweets.map((galeryTweet) => {
+            const tweet = galeryTweet.tweet;
 
-          return (
-            <Stack key={tweet.id}>
-              <Heading>{galeryTweet.title}</Heading>
-              <Heading size="md">{tweet.id}</Heading>
-              <pre>{JSON.stringify(tweet.media, null, 2)}</pre>
+            return (
+              <Stack key={tweet.id}>
+                <Heading>{galeryTweet.title}</Heading>
+                <Heading size="md">{tweet.id}</Heading>
+                <pre>{JSON.stringify(tweet.media, null, 2)}</pre>
 
-              <Tweet
-                aspect="4:5"
-                theme={galeryTweet.theme}
-                tweet={tweet}
-                watermark
-              />
-            </Stack>
-          );
-        })}
-      </Stack>
-    </Container>
+                <Tweet
+                  aspect="4:5"
+                  theme={galeryTweet.theme}
+                  tweet={tweet}
+                  watermark
+                />
+              </Stack>
+            );
+          })}
+        </Stack>
+      </Container>
+      <Flex
+        direction="column"
+        bgColor="orange.700"
+        p={8}
+        h="400px"
+        w="400px"
+        mx="auto"
+        my={4}
+      >
+        <Heading flex="1">{galleryTweets[2].tweet.text}</Heading>
+
+        <Img
+          flex="auto"
+          src={"https://pbs.twimg.com/media/FZ4s5-8UcAE0Vtr.jpg"}
+          objectFit="cover"
+          w="100%"
+          h="100%"
+        />
+      </Flex>
+    </>
   );
 };
 
