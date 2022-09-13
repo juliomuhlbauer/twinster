@@ -26,19 +26,24 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
       <Center>
         <Stack spacing={4} align="center" mb={48}>
           {thread.map((tweet, index) => (
-            <Center key={index} position="relative">
-              <Box p={2} borderWidth="1px" borderRadius="lg">
-                <Img
-                  id={`tweet-${tweet.id}`}
-                  w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
-                  h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
-                  src={`/api/tweet/${tweet.id}?theme=${theme}`}
-                />
-              </Box>
-
+            <Box
+              key={index}
+              position="relative"
+              p={2}
+              borderWidth="1px"
+              borderRadius="lg"
+            >
+              <Img
+                id={`tweet-${tweet.id}`}
+                w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
+                h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
+                src={`/api/tweet/${tweet.id}?theme=${theme}`}
+              />
               <IconButton
+                variant="ghost"
                 position="absolute"
-                right={"-48px"}
+                right={2}
+                top={2}
                 aria-label="Share"
                 icon={<Icon as={FiShare} />}
                 onClick={async () => {
@@ -62,7 +67,7 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
                   }
                 }}
               />
-            </Center>
+            </Box>
           ))}
         </Stack>
       </Center>
