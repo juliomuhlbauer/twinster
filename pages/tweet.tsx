@@ -1,22 +1,34 @@
 import { Tweet } from "@/components/tweet";
 import { TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
-import { getTweet } from "@/lib/twitter";
 import { NextPageWithLayout } from "@/types/next";
-import { Theme, TweetProps } from "@/types/twitter";
+import { TweetTheme, TweetProps } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
-import { missingIDTweet } from "@/utils/tweets";
-import { Box, Center, Heading, Img, Stack } from "@chakra-ui/react";
+import { missingIDTweet } from "@/assets/tweets";
+import {
+  AspectRatio,
+  Box,
+  Center,
+  Heading,
+  Img,
+  Stack,
+} from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { getTweet } from "@/lib/twitter/get-tweet";
 
 interface Editor {
   tweet: TweetProps;
 }
 
 const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
-  const [theme, setTheme] = useState<Theme>("darkBlue");
+  const [theme, setTheme] = useState<TweetTheme>("darkBlue");
+
+  const router = useRouter();
+
+  const { id } = router.query;
 
   return (
     <>
@@ -25,21 +37,13 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
       <Center py={4}>
         <Stack spacing={4}>
           <Box p={2} borderWidth="1px" borderRadius="lg">
-            <Box id={`tweet-${tweet.id}`}>
-              {
-                // TODO: support firefox
-              }
-              {typeof window !== "undefined" &&
-              window.navigator.userAgent.search("Firefox") > 1 ? (
-                <Heading>
-                  Firefox is not supported yet. Please use Chrome or Safari.
-                </Heading>
-              ) : (
-                <Tweet theme={theme} tweet={tweet} aspect="4:5" watermark />
-              )}
-
-              {/* <Img maxW="container.sm" src={"/api/tweet/" + tweet.id} /> */}
-            </Box>
+            <Img
+              id={`tweet-${id}`}
+              w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
+              h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
+              objectFit="contain"
+              src={`/api/tweet/${id}?theme=${theme}`}
+            />
           </Box>
         </Stack>
       </Center>

@@ -39,14 +39,18 @@ async function getPage(): Promise<Page> {
 
 export async function getScreenshot(
   html: string,
-  { width, height }: { width: number; height: number }
+  {
+    width,
+    height,
+    encoding,
+  }: { width: number; height: number; encoding?: "base64" | "binary" }
 ) {
   const page = await getPage();
 
   await page.setViewport({ width, height });
   await page.setContent(html);
 
-  const file = await page.screenshot({ type: "png" });
+  const file = await page.screenshot({ type: "png", encoding });
 
   return file;
 }

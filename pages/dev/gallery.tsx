@@ -1,36 +1,53 @@
 import { Tweet } from "@/components/tweet";
-import { getTweet, getTweets } from "@/lib/twitter";
-import { TweetProps } from "@/types/twitter";
-import { Container, Heading, Stack } from "@chakra-ui/react";
+import { getTweets } from "@/lib/twitter/get-tweets";
+import { TweetProps, TweetTheme } from "@/types/twitter";
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Img,
+  Stack,
+} from "@chakra-ui/react";
 import { GetStaticProps, NextPage } from "next";
 
 interface GaleryProps {
   galleryTweets: {
     tweet: TweetProps;
     title: string;
+    theme: TweetTheme;
   }[];
 }
 
 const Gallery: NextPage<GaleryProps> = ({ galleryTweets }) => {
   return (
-    <Container py={8}>
-      <Stack spacing={8} align="center">
-        <Heading>Gallery</Heading>
-        {galleryTweets.map((galeryTweet) => {
-          const tweet = galeryTweet.tweet;
+    <>
+      <Container py={8}>
+        <Stack spacing={8} align="center">
+          <Heading>Gallery</Heading>
+          {galleryTweets.map((galeryTweet) => {
+            const tweet = galeryTweet.tweet;
 
-          return (
-            <Stack key={tweet.id}>
-              <Heading>{galeryTweet.title}</Heading>
-              <Heading size="md">{tweet.id}</Heading>
-              <pre>{JSON.stringify(tweet.media, null, 2)}</pre>
+            return (
+              <Stack key={tweet.id}>
+                <Heading>{galeryTweet.title}</Heading>
+                <Heading size="md">{tweet.id}</Heading>
+                <pre>{JSON.stringify(tweet.media, null, 2)}</pre>
 
-              <Tweet aspect="4:5" theme="light" tweet={tweet} />
-            </Stack>
-          );
-        })}
-      </Stack>
-    </Container>
+                <Tweet
+                  aspect="4:5"
+                  theme={galeryTweet.theme}
+                  tweet={tweet}
+                  watermark
+                />
+              </Stack>
+            );
+          })}
+        </Stack>
+      </Container>
+    </>
   );
 };
 
@@ -41,14 +58,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
     {
       title: "Only text",
       id: "1554513891056648193",
+      theme: "light",
     },
     {
       title: "With image",
       id: "1554590741846020097",
+      theme: "darkBlue",
     },
     {
       title: "With long image",
       id: "1557731900910800897",
+      theme: "dark",
     },
     {
       title: "Retweet with comment",
@@ -64,6 +84,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     (tweet, index) => ({
       tweet,
       title: tweets[index].title,
+      theme: tweets[index].theme || "light",
     })
   );
 

@@ -1,4 +1,4 @@
-import { getThread } from "@/lib/twitter";
+import { getThread } from "@/lib/twitter/get-thread";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const twitterAPI = async (req: NextApiRequest, res: NextApiResponse) => {

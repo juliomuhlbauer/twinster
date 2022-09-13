@@ -3,7 +3,7 @@ import { Layout } from "@/layout";
 import { report } from "@/lib/analytics";
 import { NextPageWithLayout } from "@/types/next";
 import { findTweetId } from "@/utils/find-tweet-id";
-import { welcomeTweet } from "@/utils/tweets";
+import { welcomeTweet } from "@/assets/tweets";
 import {
   Box,
   chakra,
@@ -68,10 +68,10 @@ const Editor: NextPageWithLayout = () => {
                 borderWidth={2}
                 borderColor="#76E4F7"
               >
-                {types.map((type) => (
+                {types.map((t) => (
                   <Tab
-                    key={type}
-                    id={type}
+                    key={t}
+                    id={t}
                     fontWeight="medium"
                     color="gray.400"
                     _selected={{
@@ -79,12 +79,17 @@ const Editor: NextPageWithLayout = () => {
                       color: "primary.900",
                     }}
                   >
-                    {type === "tweet" ? (
+                    {t === "tweet" ? (
                       "Tweet"
                     ) : (
                       <>
                         Thread
-                        <Tag mx={2}>beta</Tag>
+                        <Tag
+                          mx={2}
+                          variant={type === "tweet" ? "subtle" : "solid"}
+                        >
+                          beta
+                        </Tag>
                       </>
                     )}
                   </Tab>
@@ -108,6 +113,7 @@ const Editor: NextPageWithLayout = () => {
                     />
                   </InputLeftElement>
                   <Input
+                    autoComplete="off"
                     aria-label="Tweet link"
                     name="link"
                     borderRadius="full"
