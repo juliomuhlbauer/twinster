@@ -165,7 +165,7 @@ export const Tweet: FC<Tweet> = ({
         {tweet.media && tweet.media.length ? <TweetMedia /> : null}
       </Stack>
 
-      {watermark && <Watermark theme={theme} />}
+      {/* {watermark && <Watermark theme={theme} />} */}
     </Box>
   );
 };
