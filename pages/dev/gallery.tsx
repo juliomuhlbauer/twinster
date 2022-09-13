@@ -47,25 +47,6 @@ const Gallery: NextPage<GaleryProps> = ({ galleryTweets }) => {
           })}
         </Stack>
       </Container>
-      <Flex
-        direction="column"
-        bgColor="orange.700"
-        p={8}
-        h="400px"
-        w="400px"
-        mx="auto"
-        my={4}
-      >
-        <Heading flex="1">{galleryTweets[2].tweet.text}</Heading>
-
-        <Img
-          flex="auto"
-          src={"https://pbs.twimg.com/media/FZ4s5-8UcAE0Vtr.jpg"}
-          objectFit="cover"
-          w="100%"
-          h="100%"
-        />
-      </Flex>
     </>
   );
 };

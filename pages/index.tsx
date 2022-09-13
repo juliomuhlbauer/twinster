@@ -113,6 +113,7 @@ const Editor: NextPageWithLayout = () => {
                     />
                   </InputLeftElement>
                   <Input
+                    autoComplete="off"
                     aria-label="Tweet link"
                     name="link"
                     borderRadius="full"

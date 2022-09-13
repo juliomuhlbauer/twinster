@@ -64,6 +64,7 @@ export const getTweets = async (ids: string[]): Promise<TweetProps[]> => {
   const tweet = await twitterClient.v2.tweets(ids, tweetParams);
 
   if (tweet.errors) {
+    console.error(tweet.errors);
     throw new Error("error fetching tweets");
   }
 
