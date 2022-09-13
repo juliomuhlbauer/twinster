@@ -1,11 +1,10 @@
 export const production = {
   name: "Twinster",
-
   slug: "twinster_app",
   description: "Share your tweets and threads anywhere",
   icons: {
     web: "/twinster.png",
-    app: "/twinster_social.png",
+    app: "/twinster-social.png",
   },
 };
 

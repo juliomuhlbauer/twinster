@@ -1,11 +1,9 @@
 {
   "name": "Twinster Dev",
-  "short_name": {
-    "name": "Twinster Dev"
-  },
+  "short_name": "Twinster Dev",
   "icons": [
     {
-      "src": "/twinster_social.png",
+      "src": "/twinster-beta.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -51,7 +49,7 @@
       "url": "/tweet",
       "icons": [
         {
-          "src": "/twinster_social.png",
+          "src": "/twinster-social.png",
           "sizes": "512x512"
         }
       ]
@@ -63,7 +61,7 @@
       "url": "/thread",
       "icons": [
         {
-          "src": "/twinster_social.png",
+          "src": "/twinster-social.png",
           "sizes": "512x512"
         }
       ]

@@ -1,4 +1,4 @@
-import { app } from "app";
+import { app } from "@/config";
 import { Html, Head, Main, NextScript } from "next/document";
 
 const { name, description, icons } = app;

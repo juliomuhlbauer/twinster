@@ -1,4 +1,4 @@
-import { app } from "app";
+import { app } from "@/config";
 import fs from "fs";
 
 const { name } = app;
@@ -52,14 +52,14 @@ const manifest = {
       short_name: "Tweet",
       description: "Open tweet page",
       url: "/tweet",
-      icons: [{ src: "/twinster_social.png", sizes: "512x512" }],
+      icons: [{ src: "/twinster-social.png", sizes: "512x512" }],
     },
     {
       name: "Design a thread",
       short_name: "Thread",
       description: "Open thread page",
       url: "/thread",
-      icons: [{ src: "/twinster_social.png", sizes: "512x512" }],
+      icons: [{ src: "/twinster-social.png", sizes: "512x512" }],
     },
   ],
 };
