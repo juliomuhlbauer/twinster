@@ -2,5 +2,13 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "no-console": ["warn", { "allow": ["warn", "error"] }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["scripts/*", "tests/*"],
+      "rules": {
+        "no-console": 0
+      }
+    }
+  ]
 }
