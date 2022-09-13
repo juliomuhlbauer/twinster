@@ -37,7 +37,7 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
 
               <IconButton
                 position="absolute"
-                right={"-64px"}
+                right={"-48px"}
                 aria-label="Share"
                 icon={<Icon as={FaShare} />}
                 onClick={async () => {
