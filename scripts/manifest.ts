@@ -5,10 +5,10 @@ const { name } = app;
 
 const manifest = {
   name: name,
-  short_name: { name },
+  short_name: name,
   icons: [
     {
-      src: "/twinster_social.png",
+      src: app.icons.app,
       sizes: "512x512",
       type: "image/png",
     },
