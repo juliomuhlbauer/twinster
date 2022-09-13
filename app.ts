@@ -19,4 +19,4 @@ export const dev = {
   },
 };
 
-export const app = process.env.NODE_ENV === "production" ? production : dev;
+export const app = process.env.VERCEL_ENV === "production" ? production : dev;
