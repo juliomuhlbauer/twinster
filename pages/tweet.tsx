@@ -33,7 +33,7 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
     <>
       <NextSeo title="Tweet" />
 
-      <Center py={4} position="relative">
+      <Center py={4}>
         <Box p={2} borderWidth="1px" borderRadius="lg">
           <Img
             id={`tweet-${tweet.id}`}
@@ -43,33 +43,6 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
             src={`/api/tweet/${tweet.id}?theme=${theme}`}
           />
         </Box>
-        <IconButton
-          position="absolute"
-          right="0px"
-          mx="auto"
-          aria-label="Share"
-          icon={<Icon as={FaShare} />}
-          onClick={async () => {
-            if (navigator.share) {
-              const dataUrl = await toDataURL(
-                `/api/tweet/${tweet.id}?theme=${theme}`
-              );
-
-              const blob = await (await fetch(dataUrl)).blob();
-
-              const image = new File([blob], "canvas.png", {
-                type: blob.type,
-              });
-
-              await navigator.share({
-                title: tweet.id,
-                text: tweet.text,
-                url: `/api/tweet/${tweet.id}?theme=${theme}`,
-                files: [image],
-              });
-            }
-          }}
-        />
       </Center>
 
       <TweetSettings theme={theme} setTheme={setTheme} tweet={tweet} />
