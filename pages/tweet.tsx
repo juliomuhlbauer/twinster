@@ -1,5 +1,5 @@
 import { Tweet } from "@/components/tweet";
-import { TweetSettings } from "@/components/tweet/settings";
+import { toDataURL, TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
 import { NextPageWithLayout } from "@/types/next";
 import { TweetTheme, TweetProps } from "@/types/twitter";
@@ -49,12 +49,23 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
           mx="auto"
           aria-label="Share"
           icon={<Icon as={FaShare} />}
-          onClick={() => {
+          onClick={async () => {
             if (navigator.share) {
-              navigator.share({
+              const dataUrl = await toDataURL(
+                `/api/tweet/${tweet.id}?theme=${theme}`
+              );
+
+              const blob = await (await fetch(dataUrl)).blob();
+
+              const image = new File([blob], "canvas.png", {
+                type: blob.type,
+              });
+
+              await navigator.share({
                 title: tweet.id,
                 text: tweet.text,
                 url: `/api/tweet/${tweet.id}?theme=${theme}`,
+                files: [image],
               });
             }
           }}

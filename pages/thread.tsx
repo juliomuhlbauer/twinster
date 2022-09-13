@@ -1,5 +1,5 @@
 import { missingIDTweet, thread7Days } from "@/assets/tweets";
-import { TweetSettings } from "@/components/tweet/settings";
+import { toDataURL, TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
 import { getThread } from "@/lib/twitter/get-thread";
 import { NextPageWithLayout } from "@/types/next";
@@ -40,12 +40,23 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
                 right={"-64px"}
                 aria-label="Share"
                 icon={<Icon as={FaShare} />}
-                onClick={() => {
+                onClick={async () => {
                   if (navigator.share) {
-                    navigator.share({
+                    const dataUrl = await toDataURL(
+                      `/api/tweet/${tweet.id}?theme=${theme}`
+                    );
+
+                    const blob = await (await fetch(dataUrl)).blob();
+
+                    const image = new File([blob], "canvas.png", {
+                      type: blob.type,
+                    });
+
+                    await navigator.share({
                       title: tweet.id,
                       text: tweet.text,
                       url: `/api/tweet/${tweet.id}?theme=${theme}`,
+                      files: [image],
                     });
                   }
                 }}

@@ -13,7 +13,7 @@ const themeIcons = {
   dark: FiMoon,
 };
 
-const toDataURL = (url: string): Promise<string> =>
+export const toDataURL = (url: string): Promise<string> =>
   fetch(url)
     .then((response) => response.blob())
     .then(
