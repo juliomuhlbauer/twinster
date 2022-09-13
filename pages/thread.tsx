@@ -9,7 +9,8 @@ import { Box, Center, Icon, IconButton, Img, Stack } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { useState } from "react";
-import { FaShare } from "react-icons/fa";
+
+import { FiShare } from "react-icons/fi";
 
 interface Editor {
   thread: TweetProps[];
@@ -39,7 +40,7 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
                 position="absolute"
                 right={"-48px"}
                 aria-label="Share"
-                icon={<Icon as={FaShare} />}
+                icon={<Icon as={FiShare} />}
                 onClick={async () => {
                   if (navigator.share) {
                     const dataUrl = await toDataURL(

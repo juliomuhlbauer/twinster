@@ -20,7 +20,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { getTweet } from "@/lib/twitter/get-tweet";
-import { FaShare } from "react-icons/fa";
+import { FiShare } from "react-icons/fi";
 
 interface Editor {
   tweet: TweetProps;

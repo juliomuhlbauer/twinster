@@ -5,7 +5,7 @@ import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
-import { FaShare } from "react-icons/fa";
+import { FiShare } from "react-icons/fi";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
 const themeIcons = {
@@ -188,7 +188,7 @@ export const TweetSettings = ({
         <IconButton
           size="lg"
           aria-label="Share"
-          icon={<Icon as={FaShare} />}
+          icon={<Icon as={FiShare} />}
           onClick={() => share()}
           isDisabled={
             tweet?.id === "error" ||
