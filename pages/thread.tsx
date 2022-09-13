@@ -5,10 +5,11 @@ import { getThread } from "@/lib/twitter/get-thread";
 import { NextPageWithLayout } from "@/types/next";
 import { TweetProps, TweetTheme } from "@/types/twitter";
 import { findTweetId } from "@/utils/find-tweet-id";
-import { Box, Center, Img, Stack } from "@chakra-ui/react";
+import { Box, Center, Icon, IconButton, Img, Stack } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import { useState } from "react";
+import { FaShare } from "react-icons/fa";
 
 interface Editor {
   thread: TweetProps[];
@@ -24,14 +25,32 @@ const ThreadEditor: NextPageWithLayout<Editor> = ({ thread }) => {
       <Center>
         <Stack spacing={4} align="center" mb={48}>
           {thread.map((tweet, index) => (
-            <Box key={tweet.id} p={2} borderWidth="1px" borderRadius="lg">
-              <Img
-                id={`tweet-${tweet.id}`}
-                w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
-                h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
-                src={`/api/tweet/${tweet.id}?theme=${theme}`}
+            <Center key={index} position="relative">
+              <Box p={2} borderWidth="1px" borderRadius="lg">
+                <Img
+                  id={`tweet-${tweet.id}`}
+                  w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
+                  h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
+                  src={`/api/tweet/${tweet.id}?theme=${theme}`}
+                />
+              </Box>
+
+              <IconButton
+                position="absolute"
+                right={"-64px"}
+                aria-label="Share"
+                icon={<Icon as={FaShare} />}
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: tweet.id,
+                      text: tweet.text,
+                      url: `/api/tweet/${tweet.id}?theme=${theme}`,
+                    });
+                  }
+                }}
               />
-            </Box>
+            </Center>
           ))}
         </Stack>
       </Center>

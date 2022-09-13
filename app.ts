@@ -4,3 +4,10 @@ export const app = {
   description: "Share your tweets and threads anywhere",
   icon: "/twinster.png",
 };
+
+export const dev = {
+  name: "Twinster Dev",
+  slug: "twinster_dev",
+  description: "Share your tweets and threads anywhere",
+  icon: "/twinster.png",
+};

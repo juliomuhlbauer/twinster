@@ -14,9 +14,9 @@
   "display": "standalone",
   "orientation": "portrait",
   "share_target": {
-    "action": "/tweet",
+    "action": "/create",
     "params": {
-      "text": "id"
+      "text": "tweet"
     }
   },
   "screenshots": [
