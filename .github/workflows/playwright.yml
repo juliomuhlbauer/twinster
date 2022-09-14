@@ -2,7 +2,7 @@ name: Playwright tests
 
 on:
   push:
-    branches: ["next"]
+    branches: ["preview"]
   pull_request:
     branches: ["main"]
 
@@ -37,7 +37,7 @@ jobs:
         run: yarn test --project=chromium
         env:
           PLAYWRIGHT_TEST_BASE_URL: ${{ steps.wait-vercel.outputs.url }}
-      
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
