@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn app-start && next dev",
-    "build": "yarn app-start && next build",
-    "start": "yarn app-start && next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
     "test": "playwright test",
     "test:chrome": "playwright test --project=chromium",
-    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "predev": "yarn app-start",
+    "postbuild": "yarn app-start && next-sitemap --config next-sitemap.config.js",
     "app-start": "tsx scripts/app-start.ts"
   },
   "dependencies": {
