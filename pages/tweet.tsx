@@ -44,7 +44,7 @@ const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
           />
         </Box>
       </Center>
-
+      
       <TweetSettings theme={theme} setTheme={setTheme} tweet={tweet} />
     </>
   );
