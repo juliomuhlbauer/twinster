@@ -7,6 +7,7 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
+import { app } from "@/config";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -34,8 +35,8 @@ const SEO = () => {
   const router = useRouter();
   return (
     <DefaultSeo
-      defaultTitle={"Twinster | Share your tweets and threads anywhere."}
-      titleTemplate={`%s | Twinster`}
+      defaultTitle={`${app.name} | Share your tweets and threads anywhere.`}
+      titleTemplate={`%s | ${app.name}`}
       description={meta.description}
       openGraph={{
         site_name: meta.title,

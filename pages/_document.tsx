@@ -1,7 +1,7 @@
-import { app } from "app";
+import { app } from "@/config";
 import { Html, Head, Main, NextScript } from "next/document";
 
-const { name, description, icon } = app;
+const { name, description, icons } = app;
 
 export default function Document() {
   return (
@@ -16,9 +16,9 @@ export default function Document() {
         <meta name="mobile-web-app-capable" content="yes" />
 
         <meta name="theme-color" content="#1c2732" />
-        <link rel="apple-touch-icon" sizes="192x192" href={icon} />
+        <link rel="apple-touch-icon" sizes="192x192" href={icons.web} />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href={icon} />
+        <link rel="shortcut icon" href={icons.web} />
       </Head>
       <body>
         <Main />

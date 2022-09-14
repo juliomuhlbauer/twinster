@@ -1,5 +1,5 @@
 import { Tweet } from "@/components/tweet";
-import { TweetSettings } from "@/components/tweet/settings";
+import { toDataURL, TweetSettings } from "@/components/tweet/settings";
 import { Layout } from "@/layout";
 import { NextPageWithLayout } from "@/types/next";
 import { TweetTheme, TweetProps } from "@/types/twitter";
@@ -10,6 +10,8 @@ import {
   Box,
   Center,
   Heading,
+  Icon,
+  IconButton,
   Img,
   Stack,
 } from "@chakra-ui/react";
@@ -18,6 +20,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { getTweet } from "@/lib/twitter/get-tweet";
+import { FiShare } from "react-icons/fi";
 
 interface Editor {
   tweet: TweetProps;
@@ -26,26 +29,20 @@ interface Editor {
 const TweetEditor: NextPageWithLayout<Editor> = ({ tweet }) => {
   const [theme, setTheme] = useState<TweetTheme>("darkBlue");
 
-  const router = useRouter();
-
-  const { id } = router.query;
-
   return (
     <>
       <NextSeo title="Tweet" />
 
       <Center py={4}>
-        <Stack spacing={4}>
-          <Box p={2} borderWidth="1px" borderRadius="lg">
-            <Img
-              id={`tweet-${id}`}
-              w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
-              h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
-              objectFit="contain"
-              src={`/api/tweet/${id}?theme=${theme}`}
-            />
-          </Box>
-        </Stack>
+        <Box p={2} borderWidth="1px" borderRadius="lg">
+          <Img
+            id={`tweet-${tweet.id}`}
+            w={{ base: 1080 / 3.5, sm: 1080 / 2.5, md: 1080 / 2 }}
+            h={{ base: 1350 / 3.5, sm: 1350 / 2.5, md: 1350 / 2 }}
+            objectFit="contain"
+            src={`/api/tweet/${tweet.id}?theme=${theme}`}
+          />
+        </Box>
       </Center>
       <TweetSettings theme={theme} setTheme={setTheme} tweet={tweet} />
     </>

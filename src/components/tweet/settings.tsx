@@ -5,6 +5,7 @@ import { Center, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import { FiShare } from "react-icons/fi";
 import { FiCloud, FiDownload, FiMoon, FiSun } from "react-icons/fi";
 
 const themeIcons = {
@@ -13,7 +14,7 @@ const themeIcons = {
   dark: FiMoon,
 };
 
-const toDataURL = (url: string): Promise<string> =>
+export const toDataURL = (url: string): Promise<string> =>
   fetch(url)
     .then((response) => response.blob())
     .then(
@@ -43,7 +44,51 @@ export const TweetSettings = ({
 }) => {
   const [isDownloading, setDownloading] = useState(false);
 
-  const onButtonClick = useCallback(async () => {
+  const share = async () => {
+    if (!navigator.share) return;
+    if (tweet) {
+      const dataUrl = await toDataURL(`/api/tweet/${tweet.id}?theme=${theme}`);
+
+      const blob = await (await fetch(dataUrl)).blob();
+
+      const image = new File([blob], `${tweet.id}-canvas.png`, {
+        type: blob.type,
+      });
+
+      await navigator.share({
+        title: tweet.id,
+        text: tweet.text,
+        url: `/api/tweet/${tweet.id}?theme=${theme}`,
+        files: [image],
+      });
+    }
+
+    if (thread) {
+      const files = thread.map(async (tweet) => {
+        const dataUrl = await toDataURL(
+          `/api/tweet/${tweet.id}?theme=${theme}`
+        );
+
+        const blob = await (await fetch(dataUrl)).blob();
+
+        const image = new File([blob], `${tweet.id}-canvas.png`, {
+          type: blob.type,
+        });
+
+        return image;
+      });
+
+      await Promise.all(files).then((files) => {
+        navigator.share({
+          title: "Thread",
+          text: "Thread",
+          files,
+        });
+      });
+    }
+  };
+
+  const donwload = useCallback(async () => {
     setDownloading(true);
 
     if (tweet) {
@@ -131,16 +176,26 @@ export const TweetSettings = ({
           size="lg"
           aria-label="Download"
           icon={<Icon as={FiDownload} />}
-          onClick={() => onButtonClick()}
+          onClick={() => donwload()}
           isLoading={isDownloading}
           isDisabled={
             tweet?.id === "error" ||
             thread?.[0]?.id === "error" ||
             canDownload === false
           }
-        >
-          Download
-        </IconButton>
+        />
+
+        <IconButton
+          size="lg"
+          aria-label="Share"
+          icon={<Icon as={FiShare} />}
+          onClick={() => share()}
+          isDisabled={
+            tweet?.id === "error" ||
+            thread?.[0]?.id === "error" ||
+            canDownload === false
+          }
+        />
       </HStack>
     </Center>
   );
