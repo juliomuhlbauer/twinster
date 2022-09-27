@@ -1,4 +1,11 @@
-import { Container, HStack, Icon, IconButton } from "@chakra-ui/react";
+import {
+  Container,
+  Heading,
+  HStack,
+  Icon,
+  IconButton,
+  Link,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FC } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -27,6 +34,11 @@ export const Header: FC<Header> = ({ isAppHome = false }) => {
             <Logo />
           </HStack>
         </HStack>
+        <Link href="https://juliomuhlbauer.com" isExternal>
+          <Heading size="sm" textDecor="underline">
+            @juliomuhlbauer
+          </Heading>
+        </Link>
       </HStack>
     </Container>
   );
