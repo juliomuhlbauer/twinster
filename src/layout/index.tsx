@@ -1,4 +1,4 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Heading, Link } from "@chakra-ui/react";
 import { FC, ReactNode, useState } from "react";
 import { Header } from "./header";
 
